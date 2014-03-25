@@ -12,7 +12,7 @@
 	<h2>Users:</h2>
 	<ul>
 		<li th:each="user : ${userList}">
-			<p th:text="Item + ${user.userId}"></p>
+			<p th:text="'Item ' + ${user.userId}"></p>
 		</li>
 	</ul>
 </div>

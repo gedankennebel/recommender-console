@@ -10,7 +10,7 @@ import javax.inject.Inject;
 
 @Controller
 @RequestMapping("/")
-public class ConsoleHome {
+public class HomeController {
 
 	@Inject
 	UserService userService;
