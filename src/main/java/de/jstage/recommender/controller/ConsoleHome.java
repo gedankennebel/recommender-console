@@ -1,6 +1,6 @@
 package de.jstage.recommender.controller;
 
-import de.jstage.recommender.config.MahoutConfig;
+import de.jstage.recommender.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +13,7 @@ import javax.inject.Inject;
 public class ConsoleHome {
 
 	@Inject
-	MahoutConfig mahoutConfig;
+	UserService userService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String home(ModelMap model) {

@@ -2,13 +2,17 @@ package de.jstage.recommender.model;
 
 public class User {
 
-	private int userId;
+	private long userId;
 
-	public int getUserId() {
+	public User(long userId) {
+		this.userId = userId;
+	}
+
+	public long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 }
