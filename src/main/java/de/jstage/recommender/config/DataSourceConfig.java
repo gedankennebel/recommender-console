@@ -3,6 +3,7 @@ package de.jstage.recommender.config;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 
@@ -22,5 +23,10 @@ public class DataSourceConfig {
 		basicDataSource.setPassword(DATABASE_PASSWORD);
 		basicDataSource.setUsername(DATABASE_USERNAME);
 		return basicDataSource;
+	}
+
+	@Bean
+	public JdbcTemplate jdbcTemplate() {
+		return new JdbcTemplate(dataSource());
 	}
 }

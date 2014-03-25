@@ -1,24 +1,24 @@
 package de.jstage.recommender.dao;
 
 import de.jstage.recommender.model.User;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.sql.DataSource;
+import java.util.ArrayList;
 import java.util.List;
 
-@Named
-public class UserDao extends AbstractDao {
+@Repository
+public class UserDao {
+
+	@Inject
+	JdbcTemplate jdbcTemplate;
 
 	public static final String USER_ID_COLUMN = "USER_ID";
 
-	@Inject
-	DataSource dataSource;
-
-	public List<User> getAllUsers(String tableName) {
-		String sql = "SELECT USER_ID FROM ?";
+	public List<User> getAllUsers() {
+		String sql = "SELECT USER_ID FROM INTRO";
 		return jdbcTemplate.query(sql,
-				ps -> ps.setString(1, tableName),
 				(rs, rowNum) -> new User(rs.getLong(USER_ID_COLUMN)));
 	}
 }

@@ -1,0 +1,16 @@
+body {
+	width: auto;
+}
+
+#leftBox {
+	overflow: auto;
+	width: 10%;
+	float: left;
+	border: solid;
+	text-align: center;
+}
+
+#leftBox li {
+	margin-left: -25px;
+	list-style: none;
+}

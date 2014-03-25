@@ -2,9 +2,9 @@ package de.jstage.recommender.controller;
 
 import de.jstage.recommender.service.UserService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.inject.Inject;
 
@@ -16,7 +16,9 @@ public class ConsoleHome {
 	UserService userService;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String home(ModelMap model) {
-		return "hello";
+	public ModelAndView home() {
+		ModelAndView modelAndView = new ModelAndView("console");
+		modelAndView.addObject("userList", userService.getAllUsers());
+		return modelAndView;
 	}
 }

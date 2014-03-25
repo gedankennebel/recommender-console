@@ -6,6 +6,8 @@ apply plugin: 'groovy'
 apply plugin: 'base'
 
 jettyRun.contextPath = '/'
+[jettyRun, jettyStop]*.stopPort = 8081
+[jettyRun, jettyStop]*.stopKey = 'lol'
 
 repositories {
     mavenCentral()

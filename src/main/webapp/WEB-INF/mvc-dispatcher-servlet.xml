@@ -12,8 +12,10 @@
 	<!--  SPRING ANNOTATION PROCESSING                                    -->
 	<!-- **************************************************************** -->
 	<mvc:annotation-driven/>
-	<context:annotation-config/>
 	<context:component-scan base-package="de.jstage.recommender"/>
+	<context:annotation-config/>
+
+	<mvc:resources mapping="/resources/**" location="/resources/"/>
 
 	<!-- **************************************************************** -->
 	<!--  THYMELEAF-SPECIFIC ARTIFACTS                                    -->

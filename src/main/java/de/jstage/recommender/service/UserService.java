@@ -13,7 +13,7 @@ public class UserService {
 	@Inject
 	UserDao userDao;
 
-	public List<User> getAllUsers(String tableName) {
-		return userDao.getAllUsers(tableName);
+	public List<User> getAllUsers() {
+		return userDao.getAllUsers();
 	}
 }
