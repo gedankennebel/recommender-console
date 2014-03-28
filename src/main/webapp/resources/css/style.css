@@ -2,15 +2,33 @@ body {
 	width: auto;
 }
 
-#leftBox {
+#users {
 	overflow: auto;
-	width: 10%;
+	float: left;
+	border: solid;
+	text-align: center;
+	padding-left: 2em;
+	padding-right: 2em;
+}
+
+#users li {
+	margin-left: -25px;
+	padding: 1em;
+	padding: 1em;
+	list-style: none;
+}
+
+#recommendations {
+	margin-left: 20px;
+	overflow: auto;
+	padding-left: 2em;
+	padding-right: 2em;
 	float: left;
 	border: solid;
 	text-align: center;
 }
 
-#leftBox li {
+#recommendations li {
 	margin-left: -25px;
 	list-style: none;
 }

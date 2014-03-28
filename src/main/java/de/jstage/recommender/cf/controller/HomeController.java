@@ -1,6 +1,7 @@
-package de.jstage.recommender.controller;
+package de.jstage.recommender.cf.controller;
 
-import de.jstage.recommender.service.UserService;
+import de.jstage.recommender.cf.model.ConsoleMetaData;
+import org.apache.mahout.cf.taste.common.TasteException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,12 +14,12 @@ import javax.inject.Inject;
 public class HomeController {
 
 	@Inject
-	UserService userService;
+	private ConsoleMetaData consoleMetaData;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView home() {
+	public ModelAndView home() throws TasteException {
 		ModelAndView modelAndView = new ModelAndView("console");
-		modelAndView.addObject("userList", userService.getAllUsers());
+		modelAndView.addObject("consoleMetaData", consoleMetaData);
 		return modelAndView;
 	}
 }

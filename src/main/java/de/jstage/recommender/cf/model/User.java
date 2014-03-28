@@ -1,4 +1,4 @@
-package de.jstage.recommender.model;
+package de.jstage.recommender.cf.model;
 
 public class User {
 
