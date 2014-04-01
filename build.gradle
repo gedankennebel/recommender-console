@@ -20,19 +20,23 @@ dependencies {
             "org.slf4j:jul-to-slf4j:1.6.1"
     runtime "org.slf4j:slf4j-log4j12:1.6.1"
 
-    compile 'org.thymeleaf:thymeleaf-spring4:2.1.2.RELEASE'
     compile 'org.springframework:spring-context:4.0.2.RELEASE'
     compile 'org.springframework:spring-context-support:4.0.2.RELEASE'
     compile "org.springframework:spring-webmvc:4.0.2.RELEASE"
     compile "org.springframework:spring-test:4.0.2.RELEASE"
     compile("org.springframework:spring-jdbc:4.0.2.RELEASE")
-    compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.12'
+
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.3.0'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.3.0'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.3.0'
 
     compile 'org.apache.mahout:mahout-core:0.8'
     compile 'org.apache.mahout:mahout-integration:0.8'
     compile 'org.apache.mahout:mahout-math:0.8'
 
     compile 'mysql:mysql-connector-java:5.1.27'
+
+    compile 'org.freemarker:freemarker:2.3.20'
 
     providedCompile "javax.servlet:servlet-api:2.5"
     providedRuntime "javax.faces:jsf-api:1.2_02"
@@ -41,39 +45,10 @@ dependencies {
     testCompile "junit:junit:4.8.2"
 }
 
-//sourceSets {
-//    main {
-//        java {
-//            srcDirs=[]
-//        }
-//         groovy {
-//            srcDirs = ['src/main/java']
-//         }
-//     }
-//
-//    test {
-//            java  {
-//                srcDirs=[]
-//            }
-//            groovy {
-//                srcDirs = ['src/test/java']
-//            }
-//
-//            resources {
-//                srcDirs = ['src/test/resources']
-//            }
-//    }
-// }
-
-compileJava {
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
-}
-
-tasks.withType(Compile) {
-    options.encoding = 'UTF-8'
-}
-
 task wrapper(type: Wrapper) {
     gradleVersion = '1.11'
+}
+
+task jettyDebug(type: Exec) {
+    commandLine './jettyRunDebug.sh'
 }

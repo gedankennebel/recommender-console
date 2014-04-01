@@ -1,16 +1,82 @@
 body {
-	width: auto;
+	margin: 0;
+	padding: 0;
+	height: 100%;
 }
 
-#leftBox {
+#logo_image {
+	height: 3.5em;
+}
+
+header {
+	padding-top: 1.5em;
+	padding-bottom: 1.5em;
+}
+
+header h1 {
+	display: inline-block;
+}
+
+#recommenderConsole {
+	width: 85%;
+	height: 50em;
+	margin: 0 auto;
+}
+
+.column {
 	overflow: auto;
-	width: 10%;
+	background: lightpink;
 	float: left;
-	border: solid;
+	width: 30%;
+	height: 100%;
+	margin-right: 10px;
+	margin-left: 10px;
+	padding: 5px;
+}
+
+.column h2 {
 	text-align: center;
 }
 
-#leftBox li {
-	margin-left: -25px;
-	list-style: none;
+#similarityTypeOption {
+	margin-top: 20px;
+	height: 50%;
+	overflow: auto;
+}
+
+#recommenderConsole table {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#recommendationTypeOption td {
+	background: lightblue;
+}
+
+#similarityTypeOption td {
+	background: lightskyblue;
+}
+
+#users table tr {
+	background: lightcyan;
+}
+
+.button {
+	border: solid;
+	padding: 1em;
+}
+
+footer {
+	background: lightblue;
+	height: 4em;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	z-index: 1;
+	text-align: center;
+	clear: both;
+}
+
+footer p {
+	padding-top: 0.8em;
 }
