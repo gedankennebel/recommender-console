@@ -19,8 +19,9 @@ public class RecommendationController {
 	@Inject
 	private ItemBasedRecommendationService recommendationService;
 
-	@RequestMapping(value = "/itemBased", method = RequestMethod.GET)
-	public List<RecommendedItem> recommendItems(@RequestParam String similarityMetric, @RequestParam long userId, @RequestParam int howMany) throws TasteException {
+	@RequestMapping(method = RequestMethod.POST)
+	public List<RecommendedItem> recommendItems(@RequestParam int howMany, @RequestParam String recommendationType,
+												@RequestParam String similarityMetric, @RequestParam long userId) throws TasteException {
 		return recommendationService.getItemBasedRecommender(SimilarityMetric.valueOf(similarityMetric)).recommend(userId, howMany);
 	}
 }

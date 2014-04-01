@@ -16,10 +16,20 @@ public enum SimilarityMetric {
 	private final boolean userBasedApproach;
 	private final boolean itemBasedApproach;
 
+	/**
+	 * workaround for freemarker, because freemarker retrieve field values with "get"-prefix
+	 * and Enum#name does not start with get!
+	 */
+	private String enumName;
+
 	SimilarityMetric(String displayName, boolean userBasedApproach, boolean itemBasedApproach) {
 		this.displayName = displayName;
 		this.userBasedApproach = userBasedApproach;
 		this.itemBasedApproach = itemBasedApproach;
+	}
+
+	public String getEnumName() {
+		return this.name();
 	}
 
 	public String getDisplayName() {

@@ -56,3 +56,9 @@ Icon
 ### Gradle ###
 .gradle
 build/
+
+# testing data#
+.csv
+.data
+.csv.zip
+.zip

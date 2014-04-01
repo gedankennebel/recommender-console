@@ -34,6 +34,12 @@ header h1 {
 	padding: 5px;
 }
 
+#numericOptions {
+	margin-top: 20px;
+	text-align: center;
+	display: none;
+}
+
 .column h2 {
 	text-align: center;
 }
@@ -49,24 +55,25 @@ header h1 {
 	margin-right: auto;
 }
 
-#recommendationTypeOption td {
+#recommendationTypeOption .button {
 	background: lightblue;
 }
 
-#similarityTypeOption td {
-	background: lightskyblue;
-}
-
-#users table tr {
-	background: lightcyan;
-}
-
 .button {
+	width: 50%;
+	text-align: center;
+	font-family: Menlo, serif;
+	font-size: 1em;
 	border: solid;
 	padding: 1em;
 }
 
+.selected, .button:hover {
+	background: forestgreen !important;
+}
+
 footer {
+	clear: both;
 	background: lightblue;
 	height: 4em;
 	position: fixed;
@@ -74,7 +81,6 @@ footer {
 	width: 100%;
 	z-index: 1;
 	text-align: center;
-	clear: both;
 }
 
 footer p {
