@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.inject.Inject;
 import java.util.List;
 
-@RequestMapping("/recommend")
 @RestController
+@RequestMapping("/recommend")
 public class RecommendationController {
 
 	@Inject

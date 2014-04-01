@@ -1,8 +1,8 @@
 package de.jstage.recommender.cf.recommender;
 
 public enum RecommendationType {
-	ITEM_BASED("Item-based Recommender"),
-	USER_BASED("User-based Recommender");
+	ITEM_BASED("item-based"),
+	USER_BASED("user-based");
 
 	private final String displayName;
 

@@ -18,6 +18,6 @@ public class MahoutConfig {
 
 	@Bean(name = "fileDataModel")
 	public DataModel fileDataModel() throws IOException {
-		return new FileDataModel(new File(servletContext.getRealPath("/resources/preference_csv/intro.csv")));
+		return new FileDataModel(new File(servletContext.getRealPath("/resources/preference_csv/u.data")));
 	}
 }
