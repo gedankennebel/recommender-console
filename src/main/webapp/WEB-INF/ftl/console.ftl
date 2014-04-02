@@ -28,7 +28,7 @@
 		</div>
 		<div id="similarityTypeOption">
 		</div>
-		<form id="recommendationForm" action="/recommend">
+		<form id="recommendationForm" action="/recommend/cf">
 			<div id="numericOptions">
 				<label for="howMany">Number of recommendations:</label>
 				<input required id="howMany" name="howMany" type="number"/>
@@ -47,10 +47,11 @@
 		</#list>
 		</table>
 	</div>
-	<div id="recommendations" class="column">
+	<div id="recommendationsColumn" class="column">
 		<h2>Recommendations:</h2>
-		<table>
-		</table>
+
+		<div id="recommendationResult">
+		</div>
 	</div>
 </div>
 <footer><p>&copy; Najum Ali 2014</p></footer>
@@ -61,17 +62,19 @@
 			$.ajax({
 				url: "/similarityTyp",
 				data: "recommendationType=" + recommendationType,
-				dataType: "json"
+				type: "GET",
+				dataType: "JSON"
 			}).done(function (data) {
 				$("#similarityTypeOption").html("<table></table>");
 				$("#numericOptions").css("display", "block");
 				$.each(data, function (index, similarityType) {
-					$("#similarityTypeOption table")
+					$("#similarityTypeOption").find("table")
 							.append('<tr onclick="selectButton(this);">' +
 									'<td id="' + similarityType.enumName + '" class="button">'
 									+ similarityType.displayName + '</td></tr>');
 				});
 			});
+			e.preventDefault();
 		});
 	});
 
@@ -81,14 +84,20 @@
 			var actionUrl = $(this).attr("action");
 			$.ajax({
 				url: actionUrl,
-				type: "POST",
-				dataType: "json",
+				type: "GET",
+				dataType: "JSON",
 				data: postData
 			}).done(function (data) {
-				alert("jahoo");
+				$("#recommendationResult").html("<table></table>");
+				$.each(data, function (index, recommendation) {
+					$("#recommendationResult").find("table")
+							.append('<tr class="button">' +
+									'<td>' + recommendation.itemID + '</td>' +
+									'<td>' + recommendation.value + '</td>' +
+									'</tr>')
+				});
 			});
 			e.preventDefault();
-//			e.unbind(); //unbind. to stop multiple form submit.
 		});
 	});
 

@@ -3,25 +3,28 @@ package de.jstage.recommender.cf.service;
 import de.jstage.recommender.cf.recommender.SimilarityMetric;
 import org.apache.mahout.cf.taste.common.TasteException;
 import org.apache.mahout.cf.taste.eval.RecommenderBuilder;
-import org.apache.mahout.cf.taste.impl.recommender.GenericItemBasedRecommender;
+import org.apache.mahout.cf.taste.impl.neighborhood.NearestNUserNeighborhood;
+import org.apache.mahout.cf.taste.impl.recommender.GenericUserBasedRecommender;
 import org.apache.mahout.cf.taste.impl.similarity.CityBlockSimilarity;
 import org.apache.mahout.cf.taste.impl.similarity.EuclideanDistanceSimilarity;
 import org.apache.mahout.cf.taste.impl.similarity.LogLikelihoodSimilarity;
 import org.apache.mahout.cf.taste.impl.similarity.PearsonCorrelationSimilarity;
+import org.apache.mahout.cf.taste.impl.similarity.SpearmanCorrelationSimilarity;
 import org.apache.mahout.cf.taste.impl.similarity.TanimotoCoefficientSimilarity;
 import org.apache.mahout.cf.taste.impl.similarity.UncenteredCosineSimilarity;
 import org.apache.mahout.cf.taste.model.DataModel;
+import org.apache.mahout.cf.taste.neighborhood.UserNeighborhood;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.apache.mahout.cf.taste.recommender.Recommender;
-import org.apache.mahout.cf.taste.similarity.ItemSimilarity;
+import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.util.EnumMap;
 import java.util.List;
 
-@Service("itemBased")
-public class ItemBasedRecommendationService implements RecommendationService {
+@Service("userBased")
+public class UserBasedRecommendationService implements RecommendationService {
 
 	@Inject
 	private DataModel dataModel;
@@ -58,6 +61,8 @@ public class ItemBasedRecommendationService implements RecommendationService {
 				return buildRecommender(new TanimotoCoefficientSimilarity(dataModel));
 			case CITY_BLOCK:
 				return buildRecommender(new CityBlockSimilarity(dataModel));
+			case SPEARMAN_CORRELATION:
+				return buildRecommender(new SpearmanCorrelationSimilarity(dataModel));
 			case LOGLIKELIHOOD_SIMILARITY:
 				return buildRecommender(new LogLikelihoodSimilarity(dataModel));
 			case UNCENTERED_COSINE_SIMILARITY:
@@ -67,8 +72,9 @@ public class ItemBasedRecommendationService implements RecommendationService {
 		}
 	}
 
-	private Recommender buildRecommender(ItemSimilarity similarity) throws TasteException {
-		RecommenderBuilder recommenderBuilder = model -> new GenericItemBasedRecommender(model, similarity);
+	private Recommender buildRecommender(UserSimilarity similarity) throws TasteException {
+		UserNeighborhood neighborhood = new NearestNUserNeighborhood(20, similarity, dataModel);
+		RecommenderBuilder recommenderBuilder = model -> new GenericUserBasedRecommender(model, neighborhood, similarity);
 		return recommenderBuilder.buildRecommender(dataModel);
 	}
 }

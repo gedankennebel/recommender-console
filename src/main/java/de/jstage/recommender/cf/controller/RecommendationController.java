@@ -1,7 +1,8 @@
 package de.jstage.recommender.cf.controller;
 
+import de.jstage.recommender.cf.recommender.RecommendationType;
 import de.jstage.recommender.cf.recommender.SimilarityMetric;
-import de.jstage.recommender.cf.service.ItemBasedRecommendationService;
+import de.jstage.recommender.cf.service.CollaborativeFilteringRecommendationService;
 import org.apache.mahout.cf.taste.common.TasteException;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,11 +18,11 @@ import java.util.List;
 public class RecommendationController {
 
 	@Inject
-	private ItemBasedRecommendationService recommendationService;
+	private CollaborativeFilteringRecommendationService cfRecommendationService;
 
-	@RequestMapping(method = RequestMethod.POST)
-	public List<RecommendedItem> recommendItems(@RequestParam int howMany, @RequestParam String recommendationType,
-												@RequestParam String similarityMetric, @RequestParam long userId) throws TasteException {
-		return recommendationService.getItemBasedRecommender(SimilarityMetric.valueOf(similarityMetric)).recommend(userId, howMany);
+	@RequestMapping(value = "/cf", method = RequestMethod.GET)
+	public List<RecommendedItem> recommendItems(@RequestParam int howMany, @RequestParam RecommendationType recommendationType,
+												@RequestParam SimilarityMetric similarityMetric, @RequestParam long userId) throws TasteException {
+		return cfRecommendationService.getRecommendations(recommendationType, similarityMetric, howMany, userId);
 	}
 }
