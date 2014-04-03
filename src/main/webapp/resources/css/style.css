@@ -76,7 +76,7 @@ footer {
 	clear: both;
 	background: lightblue;
 	height: 4em;
-	position: fixed;
+	/*position: fixed;*/
 	bottom: 0;
 	width: 100%;
 	z-index: 1;
@@ -84,5 +84,5 @@ footer {
 }
 
 footer p {
-	padding-top: 0.8em;
+	padding-top: 0.5em;
 }
