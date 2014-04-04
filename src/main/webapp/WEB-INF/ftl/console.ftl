@@ -37,15 +37,12 @@
 	</div>
 	<div id="users" class="column">
 		<h2>Users:</h2>
-
-		<table>
 		<#list userList as user>
-			<tr onclick="selectButton(this);">
-				<#assign id= user.userId/>
-				<td id="${id}" class="button">User ${id}</td>
-			</tr>
+			<#assign id= user.userId/>
+			<span onclick="selectButton(this);" id="${id}" class="button">
+				User ${id}
+			</span>
 		</#list>
-		</table>
 	</div>
 	<div id="recommendationsColumn" class="column">
 		<h2>Recommendations:</h2>

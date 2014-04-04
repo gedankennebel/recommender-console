@@ -46,8 +46,6 @@ header h1 {
 
 #similarityTypeOption {
 	margin-top: 20px;
-	height: 50%;
-	overflow: auto;
 }
 
 #recommenderConsole table {
@@ -60,12 +58,20 @@ header h1 {
 }
 
 .button {
-	width: 50%;
+	width: 100px;
 	text-align: center;
 	font-family: Menlo, serif;
 	font-size: 1em;
 	border: solid;
 	padding: 1em;
+	margin: 0.4em;
+	display: inline-block;
+}
+
+.simButton {
+	margin: 1em;
+	width: 150px;
+	text-overflow: ellipsis;
 }
 
 .selected, .button:hover {
@@ -76,7 +82,7 @@ footer {
 	clear: both;
 	background: lightblue;
 	height: 4em;
-	/*position: fixed;*/
+	position: fixed;
 	bottom: 0;
 	width: 100%;
 	z-index: 1;

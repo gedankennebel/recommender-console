@@ -8,13 +8,14 @@ $(document).ready(function () {
             type: "GET",
             dataType: "JSON"
         }).done(function (data) {
-            $("#similarityTypeOption").html("<table></table>");
+            $("#similarityTypeOption").html("");
             $("#numericOptions").css("display", "block");
             $.each(data, function (index, similarityType) {
-                $("#similarityTypeOption").find("table")
-                    .append('<tr onclick="selectButton(this);">' +
-                        '<td id="' + similarityType.enumName + '" class="button">'
-                        + similarityType.displayName + '</td></tr>');
+                $("#similarityTypeOption")
+                    .append('<span onclick="selectButton(this);" id="'
+                        + similarityType.enumName + '" class="button simButton">'
+                        + similarityType.displayName +
+                        '</span>');
             });
         });
         e.preventDefault();
