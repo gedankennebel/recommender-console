@@ -3,6 +3,8 @@
 <head>
 	<link rel="stylesheet" href="/resources/css/style.css"/>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+	<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 </head>
 <body>
 <header>
@@ -16,44 +18,83 @@
 	<div id="options" class="column">
 		<h2>Options:</h2>
 
-		<div id="recommendationTypeOption">
-			<table>
-				<tr>
-				<#list recommendationTypeList as recommendationType>
-					<td onclick="selectButton(this);" class="button"
-						id="${recommendationType}">${recommendationType.displayName}</td>
-				</#list>
-				</tr>
-			</table>
+		<div style="float: left" id="recommendationTypeOption">
+		<#list recommendationTypeList as recommendationType>
+			<span onclick="selectButton(this);" class="button" id="${recommendationType}">
+			${recommendationType.displayName}
+			</span>
+		</#list>
+		</div>
+		<div id="formWrapper" class="inputForm">
+			<form id="recommendationForm" action="/recommend/cf">
+				<input min="1" required id="howMany" name="howMany" type="number" placeholder="#"/>
+				<input type="submit" value="recommend!">
+			</form>
 		</div>
 		<div id="similarityTypeOption">
 		</div>
-		<form id="recommendationForm" action="/recommend/cf">
-			<div id="numericOptions">
-				<label for="howMany">Number of recommendations:</label>
-				<input required id="howMany" name="howMany" type="number"/>
-			</div>
-		</form>
-	</div>
-	<div id="users" class="column">
-		<h2>Users:</h2>
-		<#list userList as user>
-			<#assign id= user.userId/>
-			<span onclick="selectButton(this);" id="${id}" class="button">
-				User ${id}
-			</span>
-		</#list>
 	</div>
 	<div id="recommendationsColumn" class="column">
 		<h2>Recommendations:</h2>
 
-		<div id="recommendationResult">
+		<div class="innerColumn">
+
+			<div id="recommendationResult">
+			</div>
+		</div>
+	</div>
+	<div id="users" class="column">
+		<h2>Users:</h2>
+		<label for="quickUserSelect"> Quick select:
+		</label>
+			<input type="text" id="quickUserSelect"/>
+
+		<div class="innerColumn">
+		<#list userList as user>
+			<#assign userId= "User " + user.userId/>
+			<span onclick="selectUserButton(this);" id="${userId}" class="button">
+			${userId}
+			</span>
+		</#list>
+		</div>
+	</div>
+	<div id="information" class="column">
+		<h2>Information:</h2>
+
+		<div class="innerColumn">
 		</div>
 	</div>
 </div>
-<footer><p>&copy; iSYS jStage 2014</p></footer>
-<script src="/resources/js/similarityAjax.js"></script>
-<script src="/resources/js/recommendationAjax.js">
+<#--<footer><p>&copy; iSYS jStage 2014</p></footer>-->
+<script type="text/javascript" src="/resources/js/similarityAjax.js"></script>
+<script type="text/javascript" src="/resources/js/recommendationAjax.js"></script>
+<script type="text/javascript">
+	function selectUserButton(button) {
+		var buttonId = $(button).attr("id");
+		$("#quickUserSelect").val(buttonId);
+		selectButton(button);
+	}
+
+	function selectButton(button) {
+		$(button).siblings().removeClass("selected");
+		$(button).addClass("selected");
+	}
+
+	$(function () {
+		var availableTags = [
+		<#list userList as user>
+			<#assign userId= "User " + user.userId/>
+			"${userId}",
+		</#list>
+		];
+		$("#quickUserSelect").autocomplete({
+			source: availableTags,
+			select: function (event, ui) {
+				var span = document.getElementById(ui.item.value);
+				selectButton($(span));
+			}
+		});
+	});
 </script>
 </body>
 </html>

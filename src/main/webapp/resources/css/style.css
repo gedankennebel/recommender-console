@@ -1,56 +1,78 @@
 body {
+	height: 100%;
 	margin: 0;
 	padding: 0;
-	height: 100%;
 }
 
 #logo_image {
-	height: 3.5em;
+	height: 3em;
 }
 
 header {
-	padding-top: 1.5em;
-	padding-bottom: 1.5em;
+	padding-top: 1em;
+	padding-bottom: 1em;
 }
 
 header h1 {
 	display: inline-block;
 }
 
+h2 {
+	padding-left: 5px;
+}
+
 #recommenderConsole {
-	width: 85%;
-	height: 50em;
-	margin: 0 auto;
+	margin-left: 25px;
+	width: 95%;
+	height: 20em !important;
+	text-align: center;
+}
+
+.rightColumn {
+	float: right;
+}
+
+.leftColumn {
+	float: left;
 }
 
 .column {
+	width: 49%;
 	overflow: auto;
 	background: lightpink;
-	float: left;
-	width: 30%;
 	height: 100%;
-	margin-right: 10px;
-	margin-left: 10px;
-	padding: 5px;
-}
-
-#numericOptions {
-	margin-top: 20px;
-	text-align: center;
-	display: none;
-}
-
-.column h2 {
-	text-align: center;
+	margin-bottom: 4px;
+	display: inline-block;
 }
 
 #similarityTypeOption {
-	margin-top: 20px;
+	padding-top: 20px;
+	float: left;
 }
 
-#recommenderConsole table {
-	margin-left: auto;
-	margin-right: auto;
+.inputForm {
+	text-align: center;
+	display: none;
+	margin-top: 3px;
+	float: left;
+}
+
+input[type=text] {
+	height: 20px;
+	font-size: 1em;
+	width: 120px;
+}
+
+input[type=number] {
+	height: 37px;
+	font-size: 1.3em;
+	font-weight: bold;
+	width: 50px;
+}
+
+input[type=submit] {
+	height: 45px;
+	background: transparent;
 }
 
 #recommendationTypeOption .button {
@@ -61,17 +83,11 @@ header h1 {
 	width: 100px;
 	text-align: center;
 	font-family: Menlo, serif;
-	font-size: 1em;
+	font-size: 0.7em;
 	border: solid;
 	padding: 1em;
 	margin: 0.4em;
 	display: inline-block;
-}
-
-.simButton {
-	margin: 1em;
-	width: 150px;
-	text-overflow: ellipsis;
 }
 
 .selected, .button:hover {

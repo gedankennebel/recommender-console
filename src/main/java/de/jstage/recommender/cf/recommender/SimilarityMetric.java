@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public enum SimilarityMetric {
 	PEARSON_CORRELATION("Pearson´s correlation coefficient", true, true),
 	EUCLIDEAN_DISTANCE("Euclidean distance", true, true),
-	TANIMOTO_COEFFICIENT("Jaccard/Tanimoto index", true, true),
+	TANIMOTO_COEFFICIENT("Tanimoto index", true, true),
 	CITY_BLOCK("Manhattan metric", true, true),
 	SPEARMAN_CORRELATION("Spearman's rank correlation coefficient", true, false),
 	LOGLIKELIHOOD_SIMILARITY("Log-Likelihood function", true, true),

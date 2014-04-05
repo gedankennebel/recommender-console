@@ -25,7 +25,7 @@ $(document).ready(function () {
 function getRecommendationRequestParameters(requestParameterArray) {
     var recommendationType = $("#recommendationTypeOption").find(".selected").attr("id");
     var similarityMetric = $("#similarityTypeOption").find(".selected").attr("id");
-    var userId = $("#users").find(".selected").attr("id");
+    var userId = $("#users").find(".selected").attr("id").replace("User ", "");
     requestParameterArray.push(getFormattedRequestParameter("recommendationType", recommendationType),
         getFormattedRequestParameter("similarityMetric", similarityMetric),
         getFormattedRequestParameter("userId", userId));
@@ -37,10 +37,4 @@ function getFormattedRequestParameter(name, value) {
     queryString["name"] = name;
     queryString["value"] = value;
     return queryString;
-}
-
-//
-function selectButton(td) {
-    $(td).siblings().removeClass("selected");
-    $(td).addClass("selected");
 }

@@ -1,6 +1,6 @@
 // AJAX: Get similarity metric for selected recommender type
 $(document).ready(function () {
-    $("#recommendationTypeOption").find("td").on("click", function (e) {
+    $("#recommendationTypeOption").find("span").click(function (e) {
         var recommendationType = $(this).attr('id');
         $.ajax({
             url: "/similarityTyp",
@@ -9,11 +9,11 @@ $(document).ready(function () {
             dataType: "JSON"
         }).done(function (data) {
             $("#similarityTypeOption").html("");
-            $("#numericOptions").css("display", "block");
+            $("#formWrapper").css("display", "block");
             $.each(data, function (index, similarityType) {
                 $("#similarityTypeOption")
                     .append('<span onclick="selectButton(this);" id="'
-                        + similarityType.enumName + '" class="button simButton">'
+                        + similarityType.enumName + '" class="button">'
                         + similarityType.displayName +
                         '</span>');
             });
