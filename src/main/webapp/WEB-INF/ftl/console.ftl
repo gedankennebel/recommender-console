@@ -45,10 +45,13 @@
 	</div>
 	<div id="users" class="column">
 		<h2>Users:</h2>
-		<label for="quickUserSelect"> Quick select:
-		</label>
-			<input type="text" id="quickUserSelect"/>
 
+		<div id="quickSearch">
+			<img src="/resources/image/search.png">
+			<label for="quickUserSelect"> Quick select:
+			</label>
+			<input type="text" id="quickUserSelect"/>
+		</div>
 		<div class="innerColumn">
 		<#list userList as user>
 			<#assign userId= "User " + user.userId/>

@@ -1,7 +1,13 @@
 body {
-	height: 100%;
+	background: -webkit-linear-gradient(left top, black, deepskyblue) no-repeat;
+	background: -o-linear-gradient(bottom right, black, deepskyblue);
+	background: -moz-linear-gradient(bottom right, black, deepskyblue);
+	background: linear-gradient(to bottom right, black, deepskyblue);
+
+	height: 1000px;
 	margin: 0;
 	padding: 0;
+	color: white;
 }
 
 #logo_image {
@@ -9,6 +15,7 @@ body {
 }
 
 header {
+	margin-left: 30px;
 	padding-top: 1em;
 	padding-bottom: 1em;
 }
@@ -39,7 +46,7 @@ h2 {
 .column {
 	width: 49%;
 	overflow: auto;
-	background: lightpink;
+	background: rgba(140, 242, 255, 0.31);
 	height: 100%;
 	margin-bottom: 4px;
 	display: inline-block;
@@ -63,8 +70,16 @@ input[type=text] {
 	width: 120px;
 }
 
-input[type=number] {
+#quickSearch {
 	height: 37px;
+	margin-bottom: 10px;
+}
+
+#quickSearch img {
+	height: 1em;
+}
+
+input[type=number] {
 	font-size: 1.3em;
 	font-weight: bold;
 	width: 50px;
