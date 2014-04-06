@@ -11,10 +11,11 @@ $(document).ready(function () {
         }).done(function (data) {
             $("#recommendationResult").html("<table></table>");
             $.each(data, function (index, recommendation) {
+                index++;
                 $("#recommendationResult").find("table")
                     .append('<tr class="button">' +
-                        '<td>' + recommendation.itemID + '</td>' +
-                        '<td>' + recommendation.value + '</td>' +
+                        '<td>' + index + ". Item " + recommendation.itemID + '</td>' +
+                        '<td>' + "(Rating: " + recommendation.value + ")" + '</td>' +
                         '</tr>')
             });
         });

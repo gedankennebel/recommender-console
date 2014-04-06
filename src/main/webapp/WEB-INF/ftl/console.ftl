@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Recommender Lab</title>
 	<link rel="stylesheet" href="/resources/css/style.css"/>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-	<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/dark-hive/jquery-ui.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="//code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
 </head>
 <body>
 <header>
@@ -18,7 +21,7 @@
 	<div id="options" class="column">
 		<h2>Options:</h2>
 
-		<div style="float: left" id="recommendationTypeOption">
+		<div id="recommendationTypeOption">
 		<#list recommendationTypeList as recommendationType>
 			<span onclick="selectButton(this);" class="button" id="${recommendationType}">
 			${recommendationType.displayName}
@@ -28,7 +31,7 @@
 		<div id="formWrapper" class="inputForm">
 			<form id="recommendationForm" action="/recommend/cf">
 				<input min="1" required id="howMany" name="howMany" type="number" placeholder="#"/>
-				<input type="submit" value="recommend!">
+				<input type="submit">
 			</form>
 		</div>
 		<div id="similarityTypeOption">
@@ -64,8 +67,15 @@
 	<div id="information" class="column">
 		<h2>Information:</h2>
 
-		<div class="innerColumn">
+		<div id="fileInformation">
+			<ul>
+				<li>Users: ${consoleMetaData.numberOfUsers}</li>
+				<li>Items: ${consoleMetaData.numberOfItems}</li>
+			</ul>
 		</div>
+	</div>
+	<div id="backgroundImage">
+		<img src="/resources/image/elephant.png">
 	</div>
 </div>
 <#--<footer><p>&copy; iSYS jStage 2014</p></footer>-->
