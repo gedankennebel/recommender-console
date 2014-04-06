@@ -9,8 +9,9 @@ $(document).ready(function () {
             dataType: "JSON",
             data: postData
         }).done(function (data) {
+            $("#calculatedTime").text(data.calculationTime + " ms");
             $("#recommendationResult").html("<table></table>");
-            $.each(data, function (index, recommendation) {
+            $.each(data.recommendedItemList, function (index, recommendation) {
                 index++;
                 $("#recommendationResult").find("table")
                     .append('<tr class="button">' +

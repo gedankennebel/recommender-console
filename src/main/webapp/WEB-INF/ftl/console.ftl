@@ -73,6 +73,12 @@
 				<li>Items: ${consoleMetaData.numberOfItems}</li>
 			</ul>
 		</div>
+
+		<div id="calculationResults">
+			<ul>
+				<li id="calculatedTime"></li>
+			</ul>
+		</div>
 	</div>
 	<img id="backgroundImage" src="/resources/image/elephant.png"/>
 </div>

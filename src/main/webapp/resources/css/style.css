@@ -163,8 +163,8 @@ footer p {
 #backgroundImage {
 	opacity: 0.6;
 	left: 62%;
-	bottom: 480px;
-	position: relative;
+	top: 400px;
+	position: absolute;
 	z-index: -1;
 }
 
