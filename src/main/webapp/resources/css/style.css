@@ -16,6 +16,11 @@ header {
 	padding-left: 10px;
 }
 
+a {
+	text-decoration: none;
+	color: white;
+}
+
 header h1:hover {
 	text-shadow: -1px 10px 40px #ffc, 10px -1px 40px white;
 }
@@ -31,6 +36,7 @@ h2 {
 }
 
 #recommenderConsole {
+	margin-bottom: 200px;
 	margin-left: 20px;
 }
 
@@ -155,9 +161,11 @@ footer p {
 }
 
 #backgroundImage {
-	z-index: 1;
-	opacity: 0.7;
-	background-position: bottom;
+	opacity: 0.6;
+	left: 62%;
+	bottom: 480px;
+	position: relative;
+	z-index: -1;
 }
 
 .innerColumn {

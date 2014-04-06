@@ -13,7 +13,7 @@
 <header>
 	<img id="logo_image" src="/resources/image/logo.png"/>
 
-	<h1>Recommender Lab</h1>
+	<h1><a href="/">Recommender Lab</a></h1>
 </header>
 <#assign userList = consoleMetaData.userList/>
 <#assign recommendationTypeList = consoleMetaData.recommendationTypeList/>
@@ -74,9 +74,7 @@
 			</ul>
 		</div>
 	</div>
-	<div id="backgroundImage">
-		<img src="/resources/image/elephant.png">
-	</div>
+	<img id="backgroundImage" src="/resources/image/elephant.png"/>
 </div>
 <#--<footer><p>&copy; iSYS jStage 2014</p></footer>-->
 <script type="text/javascript" src="/resources/js/similarityAjax.js"></script>
