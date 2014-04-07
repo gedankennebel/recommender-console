@@ -6,7 +6,7 @@ import java.util.List;
 
 public class RecommendationResponse {
 	private List<RecommendedItem> recommendedItemList;
-	private long calculationTime;
+	private double calculationTime;
 
 	public RecommendationResponse(List<RecommendedItem> recommendedItemList) {
 		this.recommendedItemList = recommendedItemList;
@@ -25,11 +25,11 @@ public class RecommendationResponse {
 		this.recommendedItemList = recommendedItemList;
 	}
 
-	public long getCalculationTime() {
+	public double getCalculationTime() {
 		return calculationTime;
 	}
 
-	public void setCalculationTime(long calculationTime) {
+	public void setCalculationTime(double calculationTime) {
 		this.calculationTime = calculationTime;
 	}
 }

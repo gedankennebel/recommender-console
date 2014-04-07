@@ -14,8 +14,9 @@ public class ComputingTimeAspect {
 	public Object measureTimeWithOverhead(ProceedingJoinPoint joinPoint) throws Throwable {
 		long start = System.nanoTime();
 		Object proceed = joinPoint.proceed();
+		double calculationTime = (System.nanoTime() - start);
 		if (proceed instanceof RecommendationResponse)
-			((RecommendationResponse) proceed).setCalculationTime((System.nanoTime() - start) / 1_000_000);
+			((RecommendationResponse) proceed).setCalculationTime(calculationTime / 1_000_000);
 		return proceed;
 	}
 }

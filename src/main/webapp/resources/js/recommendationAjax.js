@@ -1,3 +1,22 @@
+var speedGauge = new JustGage({
+    id: "gauge",
+    value: 0,
+    min: 0,
+    max: 1000,
+    title: "calculation time (ms)",
+    titleFontColor: "white",
+    valueFontColor: "white",
+    showMinMax: false,
+    decimals: true,
+    donut: true,
+    gaugeWidthScale: 0.2,
+    startAnimationType: "linear",
+    startAnimationTime: 300,
+    refreshAnimationTime: 500,
+    refreshAnimationType: "linear",
+    counter: true
+});
+
 //	AJAX: Get recommendations with given parameters
 $(document).ready(function () {
     $("#recommendationForm").submit(function (e) {
@@ -10,6 +29,7 @@ $(document).ready(function () {
             data: postData
         }).done(function (data) {
             $("#calculatedTime").text(data.calculationTime + " ms");
+            speedGauge.refresh(data.calculationTime);
             $("#recommendationResult").html("<table></table>");
             $.each(data.recommendedItemList, function (index, recommendation) {
                 index++;

@@ -6,8 +6,10 @@
 	<title>Recommender Lab</title>
 	<link rel="stylesheet" href="/resources/css/style.css"/>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/dark-hive/jquery-ui.css">
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script src="//code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script type="text/javascript" src="//code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="http://justgage.com/demos/lib/raphael.2.1.0.min.js"></script>
+	<script src="http://justgage.com/justgage.js"></script>
 </head>
 <body>
 <header>
@@ -19,7 +21,7 @@
 <#assign recommendationTypeList = consoleMetaData.recommendationTypeList/>
 <div id="recommenderConsole">
 	<div id="options" class="column">
-		<h2>Options:</h2>
+		<h2>Options</h2>
 
 		<div id="recommendationTypeOption">
 		<#list recommendationTypeList as recommendationType>
@@ -38,7 +40,7 @@
 		</div>
 	</div>
 	<div id="recommendationsColumn" class="column">
-		<h2>Recommendations:</h2>
+		<h2>Recommendations</h2>
 
 		<div class="innerColumn">
 
@@ -47,7 +49,7 @@
 		</div>
 	</div>
 	<div id="users" class="column">
-		<h2>Users:</h2>
+		<h2>Users</h2>
 
 		<div id="quickSearch">
 			<img src="/resources/image/search.png">
@@ -65,19 +67,17 @@
 		</div>
 	</div>
 	<div id="information" class="column">
-		<h2>Information:</h2>
+		<h2>Information</h2>
 
 		<div id="fileInformation">
 			<ul>
-				<li>Users: ${consoleMetaData.numberOfUsers}</li>
-				<li>Items: ${consoleMetaData.numberOfItems}</li>
+				<li>Total Users: <span>${consoleMetaData.numberOfUsers}</span></li>
+				<li>Total Items: <span>${consoleMetaData.numberOfItems}</span></li>
 			</ul>
 		</div>
 
 		<div id="calculationResults">
-			<ul>
-				<li id="calculatedTime"></li>
-			</ul>
+			<div id="gauge"></div>
 		</div>
 	</div>
 	<img id="backgroundImage" src="/resources/image/elephant.png"/>
