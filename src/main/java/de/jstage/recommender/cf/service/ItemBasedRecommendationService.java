@@ -20,11 +20,6 @@ import java.util.List;
 @Service("itemBased")
 public class ItemBasedRecommendationService extends AbstractCFRecommendationService {
 
-	@Override
-	public List<RecommendedItem> getRecommendations(SimilarityMetric similarityMetric, int howMany, long userId) throws TasteException {
-		return getRecommender(similarityMetric).recommend(userId, howMany);
-	}
-
 	protected Recommender createRecommenderForGivenSimilarityMetric(SimilarityMetric similarityMetric) throws TasteException {
 		switch (similarityMetric) {
 			case PEARSON_CORRELATION:

@@ -26,7 +26,7 @@ header h1:hover {
 }
 
 header h1 {
-	text-shadow: -1px 1px 8px #ffc, 1px -1px 8px white;
+	text-shadow: -1px 5px 20px #ffc, 5px -5px 20px white;
 	display: inline-block;
 }
 

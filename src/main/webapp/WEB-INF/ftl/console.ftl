@@ -73,6 +73,9 @@
 			<ul>
 				<li>Total Users: <span>${consoleMetaData.numberOfUsers}</span></li>
 				<li>Total Items: <span>${consoleMetaData.numberOfItems}</span></li>
+				<li>
+					(Mahout) DataModel created in: <span>${consoleMetaData.dataModelCreationTime} ms</span>
+				</li>
 			</ul>
 		</div>
 

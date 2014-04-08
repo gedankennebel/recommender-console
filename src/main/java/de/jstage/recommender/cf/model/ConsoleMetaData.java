@@ -10,12 +10,15 @@ public class ConsoleMetaData {
 	private List<User> userList;
 	private int numberOfUsers;
 	private int numberOfItems;
+	private double dataModelCreationTime;
 
-	public ConsoleMetaData(List<RecommendationType> recommendationTypeList, List<User> userList, int numberOfUsers, int numberOfItems) {
+	public ConsoleMetaData(List<RecommendationType> recommendationTypeList, List<User> userList, int numberOfUsers,
+						   int numberOfItems, double dataModelCreationTime) {
 		this.recommendationTypeList = recommendationTypeList;
 		this.userList = userList;
 		this.numberOfUsers = numberOfUsers;
 		this.numberOfItems = numberOfItems;
+		this.dataModelCreationTime = dataModelCreationTime;
 	}
 
 	public List<RecommendationType> getRecommendationTypeList() {
@@ -48,5 +51,13 @@ public class ConsoleMetaData {
 
 	public void setNumberOfItems(int numberOfItems) {
 		this.numberOfItems = numberOfItems;
+	}
+
+	public double getDataModelCreationTime() {
+		return dataModelCreationTime;
+	}
+
+	public void setDataModelCreationTime(double dataModelCreationTime) {
+		this.dataModelCreationTime = dataModelCreationTime;
 	}
 }

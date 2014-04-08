@@ -1,5 +1,6 @@
 package de.jstage.recommender.cf.config;
 
+import de.jstage.recommender.cf.aspect.ComputingTimeAspect;
 import de.jstage.recommender.cf.model.ConsoleMetaData;
 import de.jstage.recommender.cf.model.User;
 import de.jstage.recommender.cf.recommender.RecommendationType;
@@ -21,7 +22,7 @@ public class RecommendationConfig {
 
 	@Bean(name = "currentMetaData")
 	public ConsoleMetaData createConsoleMetaData() throws TasteException {
-		return new ConsoleMetaData(getRecommendationTypes(), getUsers(), getNumberOfUsers(), getNuberOfItem());
+		return new ConsoleMetaData(getRecommendationTypes(), getUsers(), getNumberOfUsers(), getNuberOfItem(), ComputingTimeAspect.dataModelCreationTime);
 	}
 
 	private List<RecommendationType> getRecommendationTypes() {
