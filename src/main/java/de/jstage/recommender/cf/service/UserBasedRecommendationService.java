@@ -1,6 +1,6 @@
 package de.jstage.recommender.cf.service;
 
-import de.jstage.recommender.cf.recommender.SimilarityMetric;
+import de.jstage.recommender.cf.recommendationMisc.SimilarityMetric;
 import org.apache.mahout.cf.taste.common.TasteException;
 import org.apache.mahout.cf.taste.eval.RecommenderBuilder;
 import org.apache.mahout.cf.taste.impl.neighborhood.NearestNUserNeighborhood;

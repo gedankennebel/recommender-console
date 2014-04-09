@@ -30,15 +30,20 @@ $(document).ready(function () {
         }).done(function (data) {
             $("#calculatedTime").text(data.calculationTime + " ms");
             speedGauge.refresh(data.calculationTime);
-            $("#recommendationResult").html("<table></table>");
+            $("#recommendationResult").html("");
             $.each(data.recommendedItemList, function (index, recommendation) {
                 index++;
-                $("#recommendationResult").find("table")
-                    .append('<tr class="button">' +
-                        '<td>' + index + ". Item " + recommendation.itemID + '</td>' +
-                        '<td>' + "(Rating: " + recommendation.value + ")" + '</td>' +
-                        '</tr>')
+                var itemId = recommendation.itemID;
+                $("#recommendationResult")
+                    .append('<span class="button" id="' + itemId + '">'
+                        + index + ". Item " + itemId +
+                        " (Rating: " + recommendation.value + ")" + '</span>');
             });
+            if (data.recommendationParameters.recommendationType == "ITEM_BASED") {
+                $("#userId_recommendBecause").val(data.recommendationParameters.userId);
+                $("#similarityType_recommendedBecause").val(data.recommendationParameters.appliedSimilarity.enumName);
+                registerRecommendedBecauseAjaxEvent();
+            }
         });
         e.preventDefault();
     });
@@ -52,11 +57,4 @@ function getRecommendationRequestParameters(requestParameterArray) {
         getFormattedRequestParameter("similarityMetric", similarityMetric),
         getFormattedRequestParameter("userId", userId));
     return requestParameterArray;
-}
-
-function getFormattedRequestParameter(name, value) {
-    var queryString = {};
-    queryString["name"] = name;
-    queryString["value"] = value;
-    return queryString;
 }

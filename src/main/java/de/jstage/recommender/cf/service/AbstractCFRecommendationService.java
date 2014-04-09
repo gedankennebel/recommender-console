@@ -1,6 +1,7 @@
 package de.jstage.recommender.cf.service;
 
-import de.jstage.recommender.cf.recommender.SimilarityMetric;
+import de.jstage.recommender.cf.model.RecommendationParameters;
+import de.jstage.recommender.cf.recommendationMisc.SimilarityMetric;
 import org.apache.mahout.cf.taste.common.TasteException;
 import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
@@ -18,8 +19,8 @@ public abstract class AbstractCFRecommendationService implements RecommendationS
 	private EnumMap<SimilarityMetric, Recommender> recommendationTyeMap;
 
 	@Override
-	public List<RecommendedItem> getRecommendations(SimilarityMetric similarityMetric, int howMany, long userId) throws TasteException {
-		return getRecommender(similarityMetric).recommend(userId, howMany);
+	public List<RecommendedItem> getRecommendations(RecommendationParameters param) throws TasteException {
+		return getRecommender(param.getAppliedSimilarity()).recommend(param.getUserId(), param.getHowMany());
 	}
 
 	protected Recommender getRecommender(SimilarityMetric similarityMetric) throws TasteException {

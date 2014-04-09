@@ -6,10 +6,6 @@
 	<title>Recommender Lab</title>
 	<link rel="stylesheet" href="/resources/css/style.css"/>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/dark-hive/jquery-ui.css">
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	<script type="text/javascript" src="//code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="http://justgage.com/demos/lib/raphael.2.1.0.min.js"></script>
-	<script src="http://justgage.com/justgage.js"></script>
 </head>
 <body>
 <header>
@@ -43,8 +39,13 @@
 		<h2>Recommendations</h2>
 
 		<div class="innerColumn">
-
+			<form id="recommendedBecauseForm" action="/recommend/because">
+				<input id="similarityType_recommendedBecause" name="similarityMetric" type="hidden">
+				<input id="userId_recommendBecause" name="userId" type="hidden">
+			</form>
 			<div id="recommendationResult">
+			</div>
+			<div id="recommendedBecause">
 			</div>
 		</div>
 	</div>
@@ -86,20 +87,15 @@
 	<img id="backgroundImage" src="/resources/image/elephant.png"/>
 </div>
 <#--<footer><p>&copy; iSYS jStage 2014</p></footer>-->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="http://justgage.com/demos/lib/raphael.2.1.0.min.js"></script>
+<script type="text/javascript" src="http://justgage.com/justgage.js"></script>
+<script type="text/javascript" src="/resources/js/util.js"></script>
 <script type="text/javascript" src="/resources/js/similarityAjax.js"></script>
 <script type="text/javascript" src="/resources/js/recommendationAjax.js"></script>
+<script type="text/javascript" src="/resources/js/recommendedBecauseAjax.js"></script>
 <script type="text/javascript">
-	function selectUserButton(button) {
-		var buttonId = $(button).attr("id");
-		$("#quickUserSelect").val(buttonId);
-		selectButton(button);
-	}
-
-	function selectButton(button) {
-		$(button).siblings().removeClass("selected");
-		$(button).addClass("selected");
-	}
-
 	$(function () {
 		var availableTags = [
 		<#list userList as user>

@@ -1,6 +1,6 @@
 package de.jstage.recommender.cf.model;
 
-import de.jstage.recommender.cf.recommender.RecommendationType;
+import de.jstage.recommender.cf.recommendationMisc.RecommendationType;
 
 import java.util.List;
 

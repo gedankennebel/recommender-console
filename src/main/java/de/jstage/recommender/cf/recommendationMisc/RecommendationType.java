@@ -1,4 +1,4 @@
-package de.jstage.recommender.cf.recommender;
+package de.jstage.recommender.cf.recommendationMisc;
 
 public enum RecommendationType {
 	ITEM_BASED("item-based"),

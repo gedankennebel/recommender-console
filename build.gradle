@@ -14,8 +14,7 @@ repositories {
 }
 
 dependencies {
-    compile "javax.inject:javax.i" +
-            "nject:1"
+    compile "javax.inject:javax.inject:1"
 
     compile('org.springframework:spring-context:4.0.2.RELEASE') {
         exclude module: 'commons-logging'
@@ -39,6 +38,9 @@ dependencies {
 
     compile 'org.aspectj:aspectjtools:1.7.4'
     compile 'org.aspectj:aspectjrt:1.7.4'
+
+    compile "log4j:log4j:1.2.17"
+    compile "commons-logging:commons-logging:1.1.1"
 
     providedCompile "javax.servlet:servlet-api:2.5"
 

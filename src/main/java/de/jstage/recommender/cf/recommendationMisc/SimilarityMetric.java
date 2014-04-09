@@ -1,4 +1,4 @@
-package de.jstage.recommender.cf.recommender;
+package de.jstage.recommender.cf.recommendationMisc;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 

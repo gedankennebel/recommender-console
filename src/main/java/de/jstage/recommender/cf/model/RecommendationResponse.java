@@ -5,16 +5,21 @@ import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import java.util.List;
 
 public class RecommendationResponse {
+	private RecommendationParameters recommendationParameters;
 	private List<RecommendedItem> recommendedItemList;
 	private double calculationTime;
 
-	public RecommendationResponse(List<RecommendedItem> recommendedItemList) {
+	public RecommendationResponse(RecommendationParameters recommendationParameters, List<RecommendedItem> recommendedItemList) {
+		this.recommendationParameters = recommendationParameters;
 		this.recommendedItemList = recommendedItemList;
 	}
 
-	public RecommendationResponse(List<RecommendedItem> recommendedItemList, long calculationTime) {
-		this.recommendedItemList = recommendedItemList;
-		this.calculationTime = calculationTime;
+	public RecommendationParameters getRecommendationParameters() {
+		return recommendationParameters;
+	}
+
+	public void setRecommendationParameters(RecommendationParameters recommendationParameters) {
+		this.recommendationParameters = recommendationParameters;
 	}
 
 	public List<RecommendedItem> getRecommendedItemList() {
