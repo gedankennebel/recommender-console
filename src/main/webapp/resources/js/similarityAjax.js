@@ -8,16 +8,20 @@ $(document).ready(function () {
             type: "GET",
             dataType: "JSON"
         }).done(function (data) {
-            $("#similarityTypeOption").html("");
-            $("#formWrapper").css("display", "block");
-            $.each(data, function (index, similarityType) {
-                $("#similarityTypeOption")
-                    .append('<span onclick="selectButton(this);" id="'
-                        + similarityType.enumName + '" class="button">'
-                        + similarityType.displayName +
-                        '</span>');
-            });
+            renderSimilarities(data);
         });
         e.preventDefault();
     });
 });
+
+function renderSimilarities(data) {
+    $("#similarityTypeOption").html("");
+    $("#formWrapper").css("display", "block");
+    $.each(data, function (index, similarityType) {
+        $("#similarityTypeOption")
+            .append('<span onclick="selectButton(this);" id="'
+                + similarityType.enumName + '" class="button">'
+                + similarityType.displayName +
+                '</span>');
+    });
+}

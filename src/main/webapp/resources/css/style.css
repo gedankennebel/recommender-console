@@ -37,6 +37,10 @@ h2 {
 	text-decoration: underline;
 }
 
+h3 {
+	font-weight: 100;
+}
+
 #recommenderConsole {
 	margin-bottom: 200px;
 	margin-left: 20px;
@@ -116,7 +120,7 @@ input[type=submit] {
 	opacity: 0.6;
 	text-align: center;
 	font-family: Menlo, serif;
-	font-size: 0.7em;
+	font-size: 0.8em;
 	border: solid;
 	padding: 1em;
 	margin: 0.4em;
@@ -127,9 +131,18 @@ input[type=submit] {
 	width: 70px;
 }
 
-#recommendationResult .button {
+.staticButton, .staticButton:hover {
 	opacity: 1;
-	cursor: pointer;
+	cursor: default !important;
+}
+
+.backButton {
+	color: rgba(0, 249, 224, 0.8)
+}
+
+.backButton:hover {
+	opacity: 1 !important;
+	text-shadow: none !important;
 }
 
 .selected, .button:hover {

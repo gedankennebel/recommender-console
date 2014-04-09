@@ -43,9 +43,11 @@
 				<input id="similarityType_recommendedBecause" name="similarityMetric" type="hidden">
 				<input id="userId_recommendBecause" name="userId" type="hidden">
 			</form>
-			<div id="recommendationResult">
-			</div>
-			<div id="recommendedBecause">
+			<div id="flipWrapper" style="height: 15em">
+				<div id="recommendationResult">
+				</div>
+				<div id="recommendedBecause" style="display: none">
+				</div>
 			</div>
 		</div>
 	</div>
@@ -91,10 +93,13 @@
 <script type="text/javascript" src="//code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
 <script type="text/javascript" src="http://justgage.com/demos/lib/raphael.2.1.0.min.js"></script>
 <script type="text/javascript" src="http://justgage.com/justgage.js"></script>
+<script type="text/javascript" src="/resources/js/speedGauge.js"></script>
+<script type="text/javascript" src="/resources/js/lib/jquery.flip.min.js"></script>
 <script type="text/javascript" src="/resources/js/util.js"></script>
 <script type="text/javascript" src="/resources/js/similarityAjax.js"></script>
 <script type="text/javascript" src="/resources/js/recommendationAjax.js"></script>
 <script type="text/javascript" src="/resources/js/recommendedBecauseAjax.js"></script>
+<script type="text/javascript" src="/resources/js/flipAnimation.js"></script>
 <script type="text/javascript">
 	$(function () {
 		var availableTags = [
