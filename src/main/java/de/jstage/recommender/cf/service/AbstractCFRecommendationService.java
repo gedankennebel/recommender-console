@@ -3,6 +3,8 @@ package de.jstage.recommender.cf.service;
 import de.jstage.recommender.cf.model.RecommendationParameters;
 import de.jstage.recommender.cf.recommendationMisc.SimilarityMetric;
 import org.apache.mahout.cf.taste.common.TasteException;
+import org.apache.mahout.cf.taste.impl.eval.LoadEvaluator;
+import org.apache.mahout.cf.taste.impl.eval.LoadStatistics;
 import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.apache.mahout.cf.taste.recommender.Recommender;
@@ -21,6 +23,11 @@ public abstract class AbstractCFRecommendationService implements RecommendationS
 	@Override
 	public List<RecommendedItem> getRecommendations(RecommendationParameters param) throws TasteException {
 		return getRecommender(param.getAppliedSimilarity()).recommend(param.getUserId(), param.getHowMany());
+	}
+
+	@Override
+	public LoadStatistics getLoadStatistics(SimilarityMetric similarityMetric) throws TasteException {
+		return LoadEvaluator.runLoad(getRecommender(similarityMetric));
 	}
 
 	protected Recommender getRecommender(SimilarityMetric similarityMetric) throws TasteException {
