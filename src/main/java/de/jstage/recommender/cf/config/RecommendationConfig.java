@@ -36,9 +36,10 @@ public class RecommendationConfig {
 		return new AdditionalRecommendationSettings(numberOfRecommendation, numberOfRecommendedBecause, neighborhoodThreshold);
 	}
 
-	@Bean(name = "currentMetaData")
+	@Bean
 	public ConsoleMetaData createConsoleMetaData() throws TasteException {
-		return new ConsoleMetaData(getRecommendationTypes(), getUsers(), getNumberOfUsers(), getNuberOfItem(), ComputingTimeAspect.dataModelCreationTime);
+		return new ConsoleMetaData(getRecommendationTypes(), getUsers(),
+				getNumberOfUsers(), getNuberOfItem(), ComputingTimeAspect.dataModelCreationTime);
 	}
 
 	private List<RecommendationType> getRecommendationTypes() {

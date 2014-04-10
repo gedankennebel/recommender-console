@@ -22,16 +22,16 @@ a {
 }
 
 header h1:hover {
-	text-shadow: -1px 10px 40px #ffc, 10px -1px 40px white;
+	text-shadow: -1px 10px 40px white, 10px -1px 40px white;
 }
 
 header h1 {
-	text-shadow: -1px 5px 20px #ffc, 5px -5px 20px white;
+	text-shadow: -1px 5px 20px white, 5px -5px 20px white;
 	display: inline-block;
 }
 
 h2 {
-	text-shadow: -1px 10px 40px #ffc, 10px -1px 40px white;
+	text-shadow: -1px 10px 40px white, 10px -1px 40px white;
 	padding-left: 5px;
 	font-weight: 300;
 	text-decoration: underline;
@@ -68,6 +68,10 @@ h3 {
 	display: inline-block;
 }
 
+#howManyLabel, #quickSearchLabel {
+	font-size: 1.5em;
+}
+
 #similarityTypeOption {
 	padding-top: 20px;
 	float: left;
@@ -95,11 +99,33 @@ input[type=text] {
 	height: 1em;
 }
 
-input[type=number] {
+.howManyInput {
+	text-align: center;
 	font-size: 2em;
 	height: 50px;
 	font-weight: bold;
 	width: 70px;
+}
+
+.successText {
+	/*color: green;*/
+	font-weight: lighter;
+	display: none;
+	text-shadow: -1px 1px 8px green, 1px -1px 8px green;
+}
+
+.failText {
+	font-weight: lighter;
+	display: none;
+	text-shadow: -1px 1px 8px red, 1px -1px 8px red;
+}
+
+.howManyBecauseInput {
+	text-align: center;
+	font-size: 1em;
+	height: 25px;
+	font-weight: bold;
+	width: 60px;
 }
 
 input[type=number], input[type=text] {
@@ -146,7 +172,7 @@ input[type=submit] {
 }
 
 .selected, .button:hover {
-	text-shadow: -1px 1px 8px #ffc, 1px -1px 8px white;
+	text-shadow: -1px 1px 8px white, 1px -1px 8px white;
 	cursor: pointer;
 	opacity: 1;
 }

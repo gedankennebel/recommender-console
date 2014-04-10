@@ -24,6 +24,15 @@ public class ComputingTimeAspect {
 		return proceed;
 	}
 
+	@Around("execution(* de.jstage.recommender.cf.controller.RecommendationController.recommendedBecause*(..))")
+	public Object measureRecommendedBecause(ProceedingJoinPoint joinPoint) throws Throwable {
+		long start = System.nanoTime();
+		Object proceed = joinPoint.proceed();
+		long end = System.nanoTime();
+		System.out.println("Computation of recommendedBecause took " + getCalculationTimeInMilliseconds(start, end) + "ms");
+		return proceed;
+	}
+
 	@Around("execution(* de.jstage.recommender.cf.config.MahoutDataModelConfig.fileDataModel*())")
 	public Object measureDataModelCreationTime(ProceedingJoinPoint joinPoint) throws Throwable {
 		long start = System.nanoTime();

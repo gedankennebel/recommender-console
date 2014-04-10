@@ -2,6 +2,7 @@ package de.jstage.recommender.cf.controller;
 
 import de.jstage.recommender.cf.model.RecommendationParameters;
 import de.jstage.recommender.cf.model.RecommendationResponse;
+import de.jstage.recommender.cf.recommendationMisc.AdditionalRecommendationSettings;
 import de.jstage.recommender.cf.recommendationMisc.RecommendationType;
 import de.jstage.recommender.cf.recommendationMisc.SimilarityMetric;
 import de.jstage.recommender.cf.service.CollaborativeFilteringRecommendationService;
@@ -14,15 +15,19 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.inject.Inject;
 
 @RestController
-@RequestMapping("/recommend")
+@RequestMapping("/recommendation")
 public class RecommendationController {
 
 	@Inject
 	private CollaborativeFilteringRecommendationService cfRecommendationService;
 
+	@Inject
+	private AdditionalRecommendationSettings settings;
+
 	@RequestMapping(value = "/cf", method = RequestMethod.GET)
 	public RecommendationResponse recommendItems(@RequestParam int howMany, @RequestParam RecommendationType recommendationType,
 												 @RequestParam SimilarityMetric similarityMetric, @RequestParam long userId) throws TasteException {
+		settings.setNumberOfRecommendation(howMany);
 		return cfRecommendationService.getRecommendations(new RecommendationParameters(recommendationType, similarityMetric, howMany, userId));
 	}
 

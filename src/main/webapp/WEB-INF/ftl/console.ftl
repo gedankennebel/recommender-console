@@ -27,8 +27,10 @@
 		</#list>
 		</div>
 		<div id="formWrapper" class="inputForm">
-			<form id="recommendationForm" action="/recommend/cf">
-				<input min="1" required id="howMany" name="howMany" type="number" placeholder="#"/>
+			<form id="recommendationForm" action="/recommendation/cf">
+				<label id="howManyLabel" for="howMany">#recommendations: </label>
+				<input class="howManyInput" min="1" required id="howMany" name="howMany" placeholder="#" type="number"
+					   value="${settings.numberOfRecommendation}"/>
 				<input type="submit">
 			</form>
 		</div>
@@ -39,7 +41,7 @@
 		<h2>Recommendations</h2>
 
 		<div class="innerColumn">
-			<form id="recommendedBecauseForm" action="/recommend/because">
+			<form id="recommendedBecauseForm" action="/recommendation/because">
 				<input id="similarityType_recommendedBecause" name="similarityMetric" type="hidden">
 				<input id="userId_recommendBecause" name="userId" type="hidden">
 			</form>
@@ -56,8 +58,7 @@
 
 		<div id="quickSearch">
 			<img src="/resources/image/search.png">
-			<label for="quickUserSelect"> Quick select:
-			</label>
+			<label id="quickSearchLabel" for="quickUserSelect">Quick select:</label>
 			<input type="text" id="quickUserSelect"/>
 		</div>
 		<div class="innerColumn">
@@ -78,6 +79,16 @@
 				<li>Total Items: <span>${consoleMetaData.numberOfItems}</span></li>
 				<li>
 					(Mahout) DataModel created in: <span>${consoleMetaData.dataModelCreationTime} ms</span>
+				</li>
+				<li>
+					<form id="recommendationBecauseForm" action="/settings/because" method="POST">
+						<label id="howManyBecauseLabel" for="howManyBecause">#recommended because: </label>
+						<input min="1" class="howManyBecauseInput" required id="howManyBecause" name="howManyBecause"
+							   placeholder="#" type="number"
+							   value="${settings.numberOfRecommendedBecause}"/>
+						<span class="successText" id="settingsSuccess">saved!</span>
+						<span class="failText" id="settingsFail">invalid input!</span>
+					</form>
 				</li>
 			</ul>
 		</div>
@@ -100,6 +111,7 @@
 <script type="text/javascript" src="/resources/js/recommendationAjax.js"></script>
 <script type="text/javascript" src="/resources/js/recommendedBecauseAjax.js"></script>
 <script type="text/javascript" src="/resources/js/flipAnimation.js"></script>
+<script type="text/javascript" src="/resources/js/settingsAjax.js"></script>
 <script type="text/javascript">
 	$(function () {
 		var availableTags = [

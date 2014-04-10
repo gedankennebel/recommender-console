@@ -10,7 +10,7 @@ $(document).ready(function () {
             data: postData
         }).done(function (data) {
             renderRecommendation(data);
-            prepareRecommendedBecauseForItemBased(data);
+            prepareRecommendedBecauseForItemBased(data.recommendationParameters);
         });
         e.preventDefault();
     });
@@ -39,13 +39,13 @@ function renderRecommendation(data) {
     });
 }
 
-function prepareRecommendedBecauseForItemBased(data) {
-    if (data.recommendationParameters.recommendationType == "ITEM_BASED") {
-        $("#userId_recommendBecause").val(data.recommendationParameters.userId);
-        $("#similarityType_recommendedBecause").val(data.recommendationParameters.appliedSimilarity.enumName);
+function prepareRecommendedBecauseForItemBased(param) {
+    if (param.recommendationType == "ITEM_BASED") {
+        $("#userId_recommendBecause").val(param.userId);
+        $("#similarityType_recommendedBecause").val(param.appliedSimilarity.enumName);
         registerRecommendedBecauseAjaxEvent();
     } else {
-        if (data.recommendationParameters.recommendationType == "USER_BASED") {
+        if (param.recommendationType == "USER_BASED") {
             $("#recommendationResult").find("span").addClass("staticButton");
         }
     }
