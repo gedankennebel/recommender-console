@@ -1,3 +1,5 @@
+var isFlipped = false;
+
 //	AJAX: Get recommendations with given parameters
 $(document).ready(function () {
     $("#recommendationForm").submit(function (e) {
@@ -9,8 +11,17 @@ $(document).ready(function () {
             dataType: "JSON",
             data: postData
         }).done(function (data) {
-            renderRecommendation(data);
-            prepareRecommendedBecauseForItemBased(data.recommendationParameters);
+            if (isFlipped) {
+                flipback();
+                setTimeout(function () {
+                    renderRecommendation(data);
+                    prepareRecommendedBecauseForItemBased(data.recommendationParameters);
+                }, data.calculationTime + 1000);
+            }
+            else {
+                renderRecommendation(data);
+                prepareRecommendedBecauseForItemBased(data.recommendationParameters);
+            }
         });
         e.preventDefault();
     });

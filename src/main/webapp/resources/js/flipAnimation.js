@@ -9,8 +9,10 @@ function addFlipAnimation() {
             registerRecommendedBecauseAjaxEvent();
         }
     });
+    isFlipped = true;
 }
 
 function flipback() {
     $("#flipWrapper").revertFlip();
+    isFlipped = false;
 }
