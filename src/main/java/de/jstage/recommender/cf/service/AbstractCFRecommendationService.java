@@ -5,6 +5,7 @@ import de.jstage.recommender.cf.recommendationMisc.SimilarityMetric;
 import org.apache.mahout.cf.taste.common.TasteException;
 import org.apache.mahout.cf.taste.impl.eval.LoadEvaluator;
 import org.apache.mahout.cf.taste.impl.eval.LoadStatistics;
+import org.apache.mahout.cf.taste.impl.recommender.CachingRecommender;
 import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.apache.mahout.cf.taste.recommender.Recommender;
@@ -13,7 +14,7 @@ import javax.inject.Inject;
 import java.util.EnumMap;
 import java.util.List;
 
-public abstract class AbstractCFRecommendationService implements RecommendationService {
+public abstract class AbstractCfRecommendationService implements RecommendationService {
 
 	@Inject
 	protected DataModel dataModel;
@@ -43,6 +44,10 @@ public abstract class AbstractCFRecommendationService implements RecommendationS
 	private Recommender putAndReturnRecommender(SimilarityMetric similarityMetric) throws TasteException {
 		recommendationTyeMap.put(similarityMetric, createRecommenderForGivenSimilarityMetric(similarityMetric));
 		return recommendationTyeMap.get(similarityMetric);
+	}
+
+	protected Recommender getCachingDecoratedRecommender(Recommender recommender) throws TasteException {
+		return new CachingRecommender(recommender);
 	}
 
 	protected abstract Recommender createRecommenderForGivenSimilarityMetric(SimilarityMetric similarityMetric) throws TasteException;

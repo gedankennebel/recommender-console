@@ -18,7 +18,7 @@ import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 import org.springframework.stereotype.Service;
 
 @Service("userBased")
-public class UserBasedRecommendationService extends AbstractCFRecommendationService {
+public class UserBasedRecommendationService extends AbstractCfRecommendationService {
 
 	@Override
 	protected Recommender createRecommenderForGivenSimilarityMetric(SimilarityMetric similarityMetric) throws TasteException {
@@ -45,6 +45,6 @@ public class UserBasedRecommendationService extends AbstractCFRecommendationServ
 	private Recommender buildRecommender(UserSimilarity similarity) throws TasteException {
 		UserNeighborhood neighborhood = new NearestNUserNeighborhood(20, similarity, dataModel);
 		RecommenderBuilder recommenderBuilder = model -> new GenericUserBasedRecommender(model, neighborhood, similarity);
-		return recommenderBuilder.buildRecommender(dataModel);
+		return getCachingDecoratedRecommender(recommenderBuilder.buildRecommender(dataModel));
 	}
 }

@@ -22,7 +22,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 @Service("itemBased")
-public class ItemBasedRecommendationService extends AbstractCFRecommendationService {
+public class ItemBasedRecommendationService extends AbstractCfRecommendationService {
 
 	@Inject
 	private AdditionalRecommendationSettings recommendationSettings;
@@ -53,6 +53,6 @@ public class ItemBasedRecommendationService extends AbstractCFRecommendationServ
 
 	private Recommender buildRecommender(ItemSimilarity similarity) throws TasteException {
 		RecommenderBuilder recommenderBuilder = model -> new GenericItemBasedRecommender(model, similarity);
-		return recommenderBuilder.buildRecommender(dataModel);
+		return getCachingDecoratedRecommender(recommenderBuilder.buildRecommender(dataModel));
 	}
 }
