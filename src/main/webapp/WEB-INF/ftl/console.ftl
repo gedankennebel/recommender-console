@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Recommender Lab</title>
-	<link rel="stylesheet" href="/resources/css/style.css"/>
+	<link rel="stylesheet" href="/resources/css/recommenderLab.css"/>
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/dark-hive/jquery-ui.css">
 </head>
 <body>
@@ -16,6 +16,8 @@
 <#assign userList = consoleMetaData.userList/>
 <#assign recommendationTypeList = consoleMetaData.recommendationTypeList/>
 <div id="recommenderConsole">
+
+<#--OPTIONS COLUMN-->
 	<div id="options" class="column">
 		<h2>Options</h2>
 
@@ -37,6 +39,8 @@
 		<div id="similarityTypeOption">
 		</div>
 	</div>
+
+<#--RECOMMENDATIONS COLUMN-->
 	<div id="recommendationsColumn" class="column">
 		<h2>Recommendations</h2>
 
@@ -53,23 +57,28 @@
 			</div>
 		</div>
 	</div>
+
+<#--USERS COLUMN-->
 	<div id="users" class="column">
 		<h2>Users</h2>
 
 		<div id="quickSearch">
 			<img src="/resources/image/search.png">
-			<label id="quickSearchLabel" for="quickUserSelect">Quick select:</label>
-			<input type="text" id="quickUserSelect"/>
+			<label id="quickSearchLabel" for="quickUserSelect">Fast User-ID selection: </label>
+			<input type="number" name="term" id="quickUserSelect" autocomplete="off"
+				   class="quickSelect" placeholder="#" required min="1"/>
 		</div>
 		<div class="innerColumn">
 		<#list userList as user>
-			<#assign userId= "User " + user.userId/>
-			<span onclick="selectUserButton(this);" id="${userId}" class="button">
+			<#assign userId = user.userId/>
+			<span onclick="selectUserButton(this);" id="${userId}" class="button userButton">
 			${userId}
 			</span>
 		</#list>
 		</div>
 	</div>
+
+<#--INFORMATIONS COLUMN-->
 	<div id="information" class="column">
 		<h2>Information</h2>
 
@@ -92,7 +101,6 @@
 				</li>
 			</ul>
 		</div>
-
 		<div id="calculationResults">
 			<div id="gauge"></div>
 		</div>
@@ -100,34 +108,11 @@
 	<img id="backgroundImage" src="/resources/image/elephant.png"/>
 </div>
 <#--<footer><p>&copy; iSYS jStage 2014</p></footer>-->
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script type="text/javascript" src="//code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
-<script type="text/javascript" src="http://justgage.com/demos/lib/raphael.2.1.0.min.js"></script>
-<script type="text/javascript" src="http://justgage.com/justgage.js"></script>
-<script type="text/javascript" src="/resources/js/speedGauge.js"></script>
+<script type="text/javascript" src="/resources/js/lib/jquery.min.js"></script>
+<script type="text/javascript" src="/resources/js/lib/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/resources/js/lib/raphael.min.js"></script>
+<script type="text/javascript" src="/resources/js/lib/justGage.js"></script>
 <script type="text/javascript" src="/resources/js/lib/jquery.flip.min.js"></script>
-<script type="text/javascript" src="/resources/js/util.js"></script>
-<script type="text/javascript" src="/resources/js/similarityAjax.js"></script>
-<script type="text/javascript" src="/resources/js/recommendationAjax.js"></script>
-<script type="text/javascript" src="/resources/js/recommendedBecauseAjax.js"></script>
-<script type="text/javascript" src="/resources/js/flipAnimation.js"></script>
-<script type="text/javascript" src="/resources/js/settingsAjax.js"></script>
-<script type="text/javascript">
-	$(function () {
-		var availableTags = [
-		<#list userList as user>
-			<#assign userId= "User " + user.userId/>
-			"${userId}",
-		</#list>
-		];
-		$("#quickUserSelect").autocomplete({
-			source: availableTags,
-			select: function (event, ui) {
-				var span = document.getElementById(ui.item.value);
-				selectButton($(span));
-			}
-		});
-	});
-</script>
+<script type="text/javascript" src="/resources/js/recommenderLab.js"></script>
 </body>
 </html>

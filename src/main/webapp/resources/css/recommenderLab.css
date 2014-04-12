@@ -48,7 +48,7 @@ h3 {
 
 #recommendationTypeOption {
 	float: left;
-	padding-left: 10px;
+	padding-left: 50px;
 }
 
 .rightColumn {
@@ -90,9 +90,16 @@ input[type=text] {
 	width: 120px;
 }
 
+.quickSelect {
+	text-align: center;
+	font-size: 1.1em;
+	height: 20px;
+	font-weight: bold;
+	width: 80px;
+}
+
 #quickSearch {
-	height: 37px;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 }
 
 #quickSearch img {
@@ -130,6 +137,7 @@ input[type=text] {
 
 input[type=number], input[type=text] {
 	color: black;
+	text-align: center;
 }
 
 input[type=submit] {
@@ -153,8 +161,12 @@ input[type=submit] {
 	display: inline-block;
 }
 
-#users .button {
+.userButton {
 	width: 70px;
+}
+
+.userButton:before {
+	content: "User ";
 }
 
 .staticButton, .staticButton:hover {
@@ -169,6 +181,10 @@ input[type=submit] {
 .backButton:hover {
 	opacity: 1 !important;
 	text-shadow: none !important;
+}
+
+#quickUserSelect:before {
+	content: "User ";
 }
 
 .selected, .button:hover {
@@ -222,4 +238,12 @@ footer p {
 	float: right;
 	width: 250px;
 	height: 250px;
+}
+
+.ui-autocomplete {
+	max-height: 200px;
+	overflow-y: auto;
+	/* prevent horizontal scrollbar */
+	overflow-x: hidden;
+	background: rgba(0, 4, 12, 0.57) !important;
 }
