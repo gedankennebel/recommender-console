@@ -24,9 +24,6 @@ import java.util.List;
 @Service("itemBased")
 public class ItemBasedRecommendationService extends AbstractCfRecommendationService {
 
-	@Inject
-	private AdditionalRecommendationSettings recommendationSettings;
-
 	public List<RecommendedItem> getRecommendedBecause(RecommendationParameters param) throws TasteException {
 				ItemBasedRecommender itemBasedrecommender = ((ItemBasedRecommender) getRecommender(param.getAppliedSimilarity()));
 		return itemBasedrecommender.recommendedBecause(param.getUserId(), param.getItemId(), recommendationSettings.getNumberOfRecommendedBecause());

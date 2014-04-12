@@ -1,6 +1,7 @@
 package de.jstage.recommender.cf.service;
 
 import de.jstage.recommender.cf.model.RecommendationParameters;
+import de.jstage.recommender.cf.recommendationMisc.AdditionalRecommendationSettings;
 import de.jstage.recommender.cf.recommendationMisc.SimilarityMetric;
 import org.apache.mahout.cf.taste.common.TasteException;
 import org.apache.mahout.cf.taste.impl.eval.LoadEvaluator;
@@ -18,6 +19,9 @@ public abstract class AbstractCfRecommendationService implements RecommendationS
 
 	@Inject
 	protected DataModel dataModel;
+
+	@Inject
+	protected AdditionalRecommendationSettings recommendationSettings;
 
 	private EnumMap<SimilarityMetric, Recommender> recommendationTyeMap;
 

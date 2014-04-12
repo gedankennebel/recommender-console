@@ -4,6 +4,7 @@ import de.jstage.recommender.cf.aspect.ComputingTimeAspect;
 import de.jstage.recommender.cf.model.ConsoleMetaData;
 import de.jstage.recommender.cf.model.User;
 import de.jstage.recommender.cf.recommendationMisc.AdditionalRecommendationSettings;
+import de.jstage.recommender.cf.recommendationMisc.NeighborhoodType;
 import de.jstage.recommender.cf.recommendationMisc.RecommendationType;
 import de.jstage.recommender.cf.utils.SpliteratorUtil;
 import org.apache.mahout.cf.taste.common.TasteException;
@@ -35,8 +36,10 @@ public class RecommendationConfig {
 	public AdditionalRecommendationSettings defaultSetting() {
 		int numberOfRecommendation = Integer.parseInt(environment.getProperty("numberOfRecommendation"));
 		int numberOfRecommendedBecause = Integer.parseInt(environment.getProperty("numberOfRecommendedBecause"));
-		int neighborhoodThreshold = Integer.parseInt(environment.getProperty("neighborhoodThreshold"));
-		return new AdditionalRecommendationSettings(numberOfRecommendation, numberOfRecommendedBecause, neighborhoodThreshold);
+		double neighborhoodThreshold = Double.parseDouble(environment.getProperty("neighborhoodThreshold"));
+		String neighorhoodType = environment.getProperty("neighborhoodType");
+		return new AdditionalRecommendationSettings(numberOfRecommendation, numberOfRecommendedBecause,
+				neighborhoodThreshold, NeighborhoodType.valueOf(neighorhoodType));
 	}
 
 	@Bean

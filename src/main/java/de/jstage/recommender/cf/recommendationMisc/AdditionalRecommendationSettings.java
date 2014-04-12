@@ -2,14 +2,25 @@ package de.jstage.recommender.cf.recommendationMisc;
 
 public class AdditionalRecommendationSettings {
 
+	private NeighborhoodType neighborhoodType;
 	private int numberOfRecommendation;
 	private int numberOfRecommendedBecause;
-	private int neighbourhoodThreshold;
+	private double neighbourhoodThreshold;
 
-	public AdditionalRecommendationSettings(int numberOfRecommendation, int numberOfRecommendedBecause, int neighbourhoodThreshold) {
+	public AdditionalRecommendationSettings(int numberOfRecommendation, int numberOfRecommendedBecause,
+											double neighbourhoodThreshold, NeighborhoodType type) {
 		this.numberOfRecommendation = numberOfRecommendation;
 		this.numberOfRecommendedBecause = numberOfRecommendedBecause;
 		this.neighbourhoodThreshold = neighbourhoodThreshold;
+		this.neighborhoodType = type;
+	}
+
+	public NeighborhoodType getNeighborhoodType() {
+		return neighborhoodType;
+	}
+
+	public void setNeighborhoodType(NeighborhoodType neighborhoodType) {
+		this.neighborhoodType = neighborhoodType;
 	}
 
 	public int getNumberOfRecommendation() {
@@ -28,11 +39,11 @@ public class AdditionalRecommendationSettings {
 		this.numberOfRecommendedBecause = numberOfRecommendedBecause;
 	}
 
-	public int getNeighbourhoodThreshold() {
+	public double getNeighbourhoodThreshold() {
 		return neighbourhoodThreshold;
 	}
 
-	public void setNeighbourhoodThreshold(int neighbourhoodThreshold) {
+	public void setNeighbourhoodThreshold(double neighbourhoodThreshold) {
 		this.neighbourhoodThreshold = neighbourhoodThreshold;
 	}
 }
