@@ -37,9 +37,10 @@ public class RecommendationConfig {
 		int numberOfRecommendation = Integer.parseInt(environment.getProperty("numberOfRecommendation"));
 		int numberOfRecommendedBecause = Integer.parseInt(environment.getProperty("numberOfRecommendedBecause"));
 		double neighborhoodThreshold = Double.parseDouble(environment.getProperty("neighborhoodThreshold"));
+		boolean isCachingRecommender = Boolean.parseBoolean(environment.getProperty("cachingRecommender"));
 		String neighorhoodType = environment.getProperty("neighborhoodType");
-		return new AdditionalRecommendationSettings(numberOfRecommendation, numberOfRecommendedBecause,
-				neighborhoodThreshold, NeighborhoodType.valueOf(neighorhoodType));
+		return new AdditionalRecommendationSettings(NeighborhoodType.valueOf(neighorhoodType),
+				numberOfRecommendation, numberOfRecommendedBecause, neighborhoodThreshold, isCachingRecommender);
 	}
 
 	@Bean

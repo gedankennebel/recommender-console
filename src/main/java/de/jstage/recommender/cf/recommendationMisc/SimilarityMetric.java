@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum SimilarityMetric {
+
 	PEARSON_CORRELATION("Pearson´s correlation coefficient", true, true),
 	EUCLIDEAN_DISTANCE("Euclidean distance", true, true),
 	TANIMOTO_COEFFICIENT("Tanimoto index", true, true),

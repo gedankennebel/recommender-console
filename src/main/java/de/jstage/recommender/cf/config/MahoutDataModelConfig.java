@@ -27,6 +27,7 @@ public class MahoutDataModelConfig {
 	public DataModel fileDataModel() throws IOException {
 		final String filePath = servletContext.getRealPath("/resources/preference_csv/");
 		final String fileName = environment.getProperty("dataModelFile");
+		System.out.println("Starting Recommender-Server based on following data file= " + fileName);
 		return new FileDataModel(new File(filePath + fileName));
 	}
 

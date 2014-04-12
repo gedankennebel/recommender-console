@@ -87,7 +87,7 @@
 				<li>Total Users: <span>${consoleMetaData.numberOfUsers}</span></li>
 				<li>Total Items: <span>${consoleMetaData.numberOfItems}</span></li>
 				<li>
-					(Mahout) DataModel created in: <span>${consoleMetaData.dataModelCreationTime} ms</span>
+					(Mahout) DataModel created in: <span>${consoleMetaData.dataModelCreationTime} seconds</span>
 				</li>
 				<li>
 					<form id="recommendationBecauseForm" action="/settings/because" method="POST">

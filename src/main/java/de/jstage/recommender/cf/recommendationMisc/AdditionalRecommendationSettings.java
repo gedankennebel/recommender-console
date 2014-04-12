@@ -6,13 +6,26 @@ public class AdditionalRecommendationSettings {
 	private int numberOfRecommendation;
 	private int numberOfRecommendedBecause;
 	private double neighbourhoodThreshold;
+	private boolean isCachingRecommender;
+	private boolean isCachingSimilarity;
+	private boolean isCachingNeighborhood;
 
-	public AdditionalRecommendationSettings(int numberOfRecommendation, int numberOfRecommendedBecause,
-											double neighbourhoodThreshold, NeighborhoodType type) {
+	public AdditionalRecommendationSettings(NeighborhoodType neighborhoodType, int numberOfRecommendation,
+											int numberOfRecommendedBecause, double neighbourhoodThreshold,
+											boolean isCachingRecommender) {
+		this.neighborhoodType = neighborhoodType;
 		this.numberOfRecommendation = numberOfRecommendation;
 		this.numberOfRecommendedBecause = numberOfRecommendedBecause;
 		this.neighbourhoodThreshold = neighbourhoodThreshold;
-		this.neighborhoodType = type;
+		this.isCachingRecommender = isCachingRecommender;
+	}
+
+	public boolean isCachingRecommender() {
+		return isCachingRecommender;
+	}
+
+	public void setCachingRecommender(boolean isCachingRecommender) {
+		this.isCachingRecommender = isCachingRecommender;
 	}
 
 	public NeighborhoodType getNeighborhoodType() {

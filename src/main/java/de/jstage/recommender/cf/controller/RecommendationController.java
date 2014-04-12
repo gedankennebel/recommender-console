@@ -28,11 +28,13 @@ public class RecommendationController {
 	public RecommendationResponse recommendItems(@RequestParam int howMany, @RequestParam RecommendationType recommendationType,
 												 @RequestParam SimilarityMetric similarityMetric, @RequestParam long userId) throws TasteException {
 		settings.setNumberOfRecommendation(howMany);
-		return cfRecommendationService.getRecommendations(new RecommendationParameters(recommendationType, similarityMetric, howMany, userId));
+		return cfRecommendationService.
+				getRecommendations(new RecommendationParameters(recommendationType, similarityMetric, howMany, userId));
 	}
 
 	@RequestMapping(value = "/because", method = RequestMethod.GET)
 	public RecommendationResponse recommendedBecause(@RequestParam SimilarityMetric similarityMetric, @RequestParam long userId, @RequestParam long itemId) throws TasteException {
-		return cfRecommendationService.getRecommendedBecause(new RecommendationParameters(similarityMetric, userId, itemId));
+		return cfRecommendationService.
+				getRecommendedBecause(new RecommendationParameters(similarityMetric, userId, itemId));
 	}
 }

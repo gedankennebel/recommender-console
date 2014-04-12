@@ -1,13 +1,13 @@
 package de.jstage.recommender.cf.recommendationMisc;
 
-public enum RecommendationType {
+public enum EvaluatorType {
 
-	ITEM_BASED("item-based"),
-	USER_BASED("user-based");
+	AVERAGE_ABSOLUTE_DIFFERENCE("Average absolute difference Evaluator"),
+	ROOT_MEAN_SQUARE("Root mean square Evaluator");
 
 	private final String displayName;
 
-	RecommendationType(String displayName) {
+	EvaluatorType(String displayName) {
 		this.displayName = displayName;
 	}
 

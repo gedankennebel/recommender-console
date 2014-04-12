@@ -16,7 +16,6 @@ import org.apache.mahout.cf.taste.impl.similarity.TanimotoCoefficientSimilarity;
 import org.apache.mahout.cf.taste.impl.similarity.UncenteredCosineSimilarity;
 import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.neighborhood.UserNeighborhood;
-import org.apache.mahout.cf.taste.recommender.Recommender;
 import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 import org.springframework.stereotype.Service;
 
@@ -24,25 +23,30 @@ import org.springframework.stereotype.Service;
 public class UserBasedRecommendationService extends AbstractCfRecommendationService {
 
 	@Override
-	protected Recommender createRecommenderForGivenSimilarityMetric(SimilarityMetric similarityMetric) throws TasteException {
+	protected RecommenderBuilder getRecommenderBuilder(SimilarityMetric similarityMetric) throws TasteException {
 		switch (similarityMetric) {
 			case PEARSON_CORRELATION:
-				return buildRecommender(new PearsonCorrelationSimilarity(dataModel));
+				return createRecommenderBuilder(new PearsonCorrelationSimilarity(dataModel));
 			case EUCLIDEAN_DISTANCE:
-				return buildRecommender(new EuclideanDistanceSimilarity(dataModel));
+				return createRecommenderBuilder(new EuclideanDistanceSimilarity(dataModel));
 			case TANIMOTO_COEFFICIENT:
-				return buildRecommender(new TanimotoCoefficientSimilarity(dataModel));
+				return createRecommenderBuilder(new TanimotoCoefficientSimilarity(dataModel));
 			case CITY_BLOCK:
-				return buildRecommender(new CityBlockSimilarity(dataModel));
+				return createRecommenderBuilder(new CityBlockSimilarity(dataModel));
 			case SPEARMAN_CORRELATION:
-				return buildRecommender(new SpearmanCorrelationSimilarity(dataModel));
+				return createRecommenderBuilder(new SpearmanCorrelationSimilarity(dataModel));
 			case LOGLIKELIHOOD_SIMILARITY:
-				return buildRecommender(new LogLikelihoodSimilarity(dataModel));
+				return createRecommenderBuilder(new LogLikelihoodSimilarity(dataModel));
 			case UNCENTERED_COSINE_SIMILARITY:
-				return buildRecommender(new UncenteredCosineSimilarity(dataModel));
+				return createRecommenderBuilder(new UncenteredCosineSimilarity(dataModel));
 			default:
-				return buildRecommender(new PearsonCorrelationSimilarity(dataModel));
+				return createRecommenderBuilder(new PearsonCorrelationSimilarity(dataModel));
 		}
+	}
+
+	public RecommenderBuilder createRecommenderBuilder(UserSimilarity similarity) throws TasteException {
+		UserNeighborhood neighborhood = getUserNeighborhood(recommendationSettings, similarity, dataModel);
+		return model -> new GenericUserBasedRecommender(model, neighborhood, similarity);
 	}
 
 	private UserNeighborhood getUserNeighborhood(AdditionalRecommendationSettings settings, UserSimilarity similarity, DataModel dataModel) throws TasteException {
@@ -55,11 +59,5 @@ public class UserBasedRecommendationService extends AbstractCfRecommendationServ
 			default:
 				return new NearestNUserNeighborhood((int) threshold, similarity, dataModel);
 		}
-	}
-
-	private Recommender buildRecommender(UserSimilarity similarity) throws TasteException {
-		UserNeighborhood neighborhood = getUserNeighborhood(recommendationSettings, similarity, dataModel);
-		RecommenderBuilder recommenderBuilder = model -> new GenericUserBasedRecommender(model, neighborhood, similarity);
-		return getCachingDecoratedRecommender(recommenderBuilder.buildRecommender(dataModel));
 	}
 }

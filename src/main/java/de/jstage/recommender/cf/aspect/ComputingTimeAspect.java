@@ -38,12 +38,17 @@ public class ComputingTimeAspect {
 		long start = System.nanoTime();
 		Object proceed = joinPoint.proceed();
 		long end = System.nanoTime();
-		dataModelCreationTime = getCalculationTimeInMilliseconds(start, end);
+		dataModelCreationTime = getCalculationTimeInSeconds(start, end);
 		return proceed;
 	}
 
 	private double getCalculationTimeInMilliseconds(long start, long end) {
 		double calculationTime = (end - start);
 		return (calculationTime / 1_000_000);
+	}
+
+	private double getCalculationTimeInSeconds(long start, long end) {
+		double calculationTime = (end - start);
+		return (calculationTime / 1_000_000_000);
 	}
 }
