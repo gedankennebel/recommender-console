@@ -4,11 +4,15 @@ import de.jstage.recommender.cf.model.RecommendationResponse;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
 public class ComputingTimeAspect {
+
+	private static final Logger log = LoggerFactory.getLogger(ComputingTimeAspect.class);
 
 	public static double dataModelCreationTime;
 
@@ -19,8 +23,11 @@ public class ComputingTimeAspect {
 		long start = System.nanoTime();
 		Object proceed = joinPoint.proceed();
 		long end = System.nanoTime();
-		if (proceed instanceof RecommendationResponse)
-			((RecommendationResponse) proceed).setCalculationTime(getCalculationTimeInMilliseconds(start, end));
+		if (proceed instanceof RecommendationResponse) {
+			double calculationTime = getCalculationTimeInMilliseconds(start, end);
+			((RecommendationResponse) proceed).setCalculationTime(calculationTime);
+			log.info("Recommendations created in " + calculationTime + "ms");
+		}
 		return proceed;
 	}
 
@@ -29,16 +36,17 @@ public class ComputingTimeAspect {
 		long start = System.nanoTime();
 		Object proceed = joinPoint.proceed();
 		long end = System.nanoTime();
-		System.out.println("Computation of recommendedBecause took " + getCalculationTimeInMilliseconds(start, end) + "ms");
+		log.info("Computation of recommendedBecause took " + getCalculationTimeInMilliseconds(start, end) + "ms");
 		return proceed;
 	}
 
-	@Around("execution(* de.jstage.recommender.cf.config.MahoutDataModelConfig.fileDataModel*())")
+	@Around("execution(public * de.jstage.recommender.cf.config.MahoutDataModelConfig.*())")
 	public Object measureDataModelCreationTime(ProceedingJoinPoint joinPoint) throws Throwable {
 		long start = System.nanoTime();
 		Object proceed = joinPoint.proceed();
 		long end = System.nanoTime();
 		dataModelCreationTime = getCalculationTimeInSeconds(start, end);
+		log.info("DataModel created in " + dataModelCreationTime + "seconds");
 		return proceed;
 	}
 

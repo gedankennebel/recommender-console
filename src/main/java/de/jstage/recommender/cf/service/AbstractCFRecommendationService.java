@@ -1,11 +1,17 @@
 package de.jstage.recommender.cf.service;
 
+import de.jstage.recommender.cf.model.EvaluationParameters;
 import de.jstage.recommender.cf.model.RecommendationParameters;
 import de.jstage.recommender.cf.recommendationMisc.AdditionalRecommendationSettings;
 import de.jstage.recommender.cf.recommendationMisc.SimilarityMetric;
 import org.apache.mahout.cf.taste.common.TasteException;
+import org.apache.mahout.cf.taste.eval.IRStatistics;
+import org.apache.mahout.cf.taste.eval.RecommenderBuilder;
+import org.apache.mahout.cf.taste.impl.eval.AverageAbsoluteDifferenceRecommenderEvaluator;
+import org.apache.mahout.cf.taste.impl.eval.GenericRecommenderIRStatsEvaluator;
 import org.apache.mahout.cf.taste.impl.eval.LoadEvaluator;
 import org.apache.mahout.cf.taste.impl.eval.LoadStatistics;
+import org.apache.mahout.cf.taste.impl.eval.RMSRecommenderEvaluator;
 import org.apache.mahout.cf.taste.impl.recommender.CachingRecommender;
 import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
@@ -35,6 +41,30 @@ public abstract class AbstractCfRecommendationService implements RecommendationS
 		return LoadEvaluator.runLoad(getRecommender(similarityMetric));
 	}
 
+	@Override
+	public IRStatistics getIRStatistics(EvaluationParameters param) throws TasteException {
+		return new GenericRecommenderIRStatsEvaluator()
+				.evaluate(getRecommenderBuilder(param.getSimilarityMetric()), null, dataModel, null, param.getRecallAt(),
+						GenericRecommenderIRStatsEvaluator.CHOOSE_THRESHOLD, param.getEvaluationPercentage());
+	}
+
+	@Override
+	public double getEvaluationScore(EvaluationParameters param) throws TasteException {
+		double trainingPercentage = param.getTrainingPercentage();
+		double evaluationPercentage = param.getEvaluationPercentage();
+		SimilarityMetric metric = param.getSimilarityMetric();
+		switch (param.getEvaluatorType()) {
+			case AVERAGE_ABSOLUTE_DIFFERENCE:
+				return new AverageAbsoluteDifferenceRecommenderEvaluator()
+						.evaluate(getRecommenderBuilder(metric), null, dataModel, trainingPercentage, evaluationPercentage);
+			case ROOT_MEAN_SQUARE:
+				return new RMSRecommenderEvaluator()
+						.evaluate(getRecommenderBuilder(metric), null, dataModel, trainingPercentage, evaluationPercentage);
+			default:
+				return 0;
+		}
+	}
+
 	protected Recommender getRecommender(SimilarityMetric similarityMetric) throws TasteException {
 		if (recommendationTyeMap != null) {
 			return (recommendationTyeMap.get(similarityMetric) != null) ?
@@ -46,13 +76,17 @@ public abstract class AbstractCfRecommendationService implements RecommendationS
 	}
 
 	private Recommender putAndReturnRecommender(SimilarityMetric similarityMetric) throws TasteException {
-		recommendationTyeMap.put(similarityMetric, createRecommenderForGivenSimilarityMetric(similarityMetric));
+		recommendationTyeMap.put(similarityMetric, buildRecommender(getRecommenderBuilder(similarityMetric)));
 		return recommendationTyeMap.get(similarityMetric);
 	}
 
-	protected Recommender getCachingDecoratedRecommender(Recommender recommender) throws TasteException {
-		return new CachingRecommender(recommender);
+	private Recommender buildRecommender(RecommenderBuilder builder) throws TasteException {
+		if (recommendationSettings.isCachingRecommender()) {
+			return new CachingRecommender(builder.buildRecommender((dataModel)));
+		} else {
+			return builder.buildRecommender((dataModel));
+		}
 	}
 
-	protected abstract Recommender createRecommenderForGivenSimilarityMetric(SimilarityMetric similarityMetric) throws TasteException;
+	protected abstract RecommenderBuilder getRecommenderBuilder(SimilarityMetric similarityMetric) throws TasteException;
 }

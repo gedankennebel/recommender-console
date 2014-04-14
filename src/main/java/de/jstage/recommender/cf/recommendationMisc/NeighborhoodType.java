@@ -2,8 +2,8 @@ package de.jstage.recommender.cf.recommendationMisc;
 
 public enum NeighborhoodType {
 
-	NEAREST_N("nearest N"),
-	THRESHOLD("threshold");
+	NEAREST_N("Fixed-size neighborhood"),
+	THRESHOLD("Threshold-based neighborhood");
 
 	private final String displayName;
 

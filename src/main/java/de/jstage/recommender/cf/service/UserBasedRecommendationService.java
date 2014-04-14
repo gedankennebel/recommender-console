@@ -50,7 +50,7 @@ public class UserBasedRecommendationService extends AbstractCfRecommendationServ
 	}
 
 	private UserNeighborhood getUserNeighborhood(AdditionalRecommendationSettings settings, UserSimilarity similarity, DataModel dataModel) throws TasteException {
-		double threshold = settings.getNeighbourhoodThreshold();
+		double threshold = settings.getNeighborhoodThreshold();
 		switch (settings.getNeighborhoodType()) {
 			case NEAREST_N:
 				return new NearestNUserNeighborhood((int) threshold, similarity, dataModel);

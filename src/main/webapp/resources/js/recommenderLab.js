@@ -10,7 +10,7 @@ var speedGauge = new JustGage({
     showMinMax: false,
     decimals: true,
     donut: true,
-    gaugeWidthScale: 0.2,
+    gaugeWidthScale: 0.1,
     startAnimationType: "linear",
     startAnimationTime: 300,
     refreshAnimationTime: 500,

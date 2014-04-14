@@ -12,8 +12,8 @@
 	<!--  SPRING ANNOTATION PROCESSING                                    -->
 	<!-- **************************************************************** -->
 	<mvc:annotation-driven/>
-	<context:component-scan base-package="de.jstage.recommender"/>
 	<context:annotation-config/>
+	<context:component-scan base-package="de.jstage.recommender"/>
 
 	<mvc:resources mapping="/resources/**" location="/resources/"/>
 	<mvc:resources mapping="/favicon.ico" location="/resources/image/favicon.ico"/>

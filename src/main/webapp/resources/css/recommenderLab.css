@@ -197,14 +197,26 @@ input[type=submit] {
 	font-family: Menlo, serif;
 	font-weight: 100;
 	float: left;
-	padding-left: 20px;
-	font-size: 1em;
+	font-size: 0.9em;
 	display: block;
-	text-align: left;
+	text-align: right;
+	width: 60%;
+	overflow: auto;
+	margin-right: 5px;
+}
+
+#fileInformation ul {
+	list-style: none;
 }
 
 #fileInformation span {
 	font-weight: bold;
+}
+
+#gauge {
+	float: left;
+	width: 38%;
+	height: 200px;
 }
 
 footer {
@@ -232,12 +244,6 @@ footer p {
 
 .innerColumn {
 	text-align: center;
-}
-
-#gauge {
-	float: right;
-	width: 250px;
-	height: 250px;
 }
 
 .ui-autocomplete {

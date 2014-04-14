@@ -82,12 +82,23 @@
 	<div id="information" class="column">
 		<h2>Information</h2>
 
+		<div id="gauge"></div>
 		<div id="fileInformation">
 			<ul>
 				<li>Total Users: <span>${consoleMetaData.numberOfUsers}</span></li>
 				<li>Total Items: <span>${consoleMetaData.numberOfItems}</span></li>
 				<li>
 					(Mahout) DataModel created in: <span>${consoleMetaData.dataModelCreationTime} seconds</span>
+				</li>
+				<li>Neighborhood type (user-based): <span>${settings.neighborhoodType.displayName}</span></li>
+				<li>Neighborhood threshold: <span>${settings.neighborhoodThreshold}</span></li>
+				<li>Recommender-Caching: <span>
+				<#if settings.cachingRecommender>
+					enabled
+				<#else >
+					disabled
+				</#if>
+				</span>
 				</li>
 				<li>
 					<form id="recommendationBecauseForm" action="/settings/because" method="POST">
@@ -100,9 +111,6 @@
 					</form>
 				</li>
 			</ul>
-		</div>
-		<div id="calculationResults">
-			<div id="gauge"></div>
 		</div>
 	</div>
 	<img id="backgroundImage" src="/resources/image/elephant.png"/>

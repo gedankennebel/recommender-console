@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Configuration
-@PropertySources(value = {@PropertySource("/mahoutConfig.properties")})
+@PropertySources(value = {@PropertySource("/mahout.properties")})
 public class RecommendationConfig {
 
 	@Inject
