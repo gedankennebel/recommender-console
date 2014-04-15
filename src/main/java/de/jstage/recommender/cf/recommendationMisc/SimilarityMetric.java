@@ -11,7 +11,8 @@ public enum SimilarityMetric {
 	CITY_BLOCK("Manhattan metric", true, true),
 	SPEARMAN_CORRELATION("Spearman's rank correlation coefficient", true, false),
 	LOGLIKELIHOOD_SIMILARITY("Log-Likelihood function", true, true),
-	UNCENTERED_COSINE_SIMILARITY("Uncentered cosine similarity", true, true);
+	UNCENTERED_COSINE_SIMILARITY("Uncentered cosine similarity", true, true),
+	PRE_COMPUTED_SIMILARITY("Precomputed similarity", false, true);
 
 	private final String displayName;
 	private final boolean userBasedApproach;

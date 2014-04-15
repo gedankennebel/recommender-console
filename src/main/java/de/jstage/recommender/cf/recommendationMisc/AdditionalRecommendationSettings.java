@@ -9,15 +9,19 @@ public class AdditionalRecommendationSettings {
 	private boolean isCachingRecommender;
 	private boolean isCachingSimilarity;
 	private boolean isCachingNeighborhood;
+	private boolean isItemPreComputationEnabled;
+	private SimilarityMetric similarityMetricForPreComputation;
+
 
 	public AdditionalRecommendationSettings(NeighborhoodType neighborhoodType, int numberOfRecommendation,
 											int numberOfRecommendedBecause, double neighborhoodThreshold,
-											boolean isCachingRecommender) {
+											boolean isCachingRecommender, boolean isItemPreComputationEnabled) {
 		this.neighborhoodType = neighborhoodType;
 		this.numberOfRecommendation = numberOfRecommendation;
 		this.numberOfRecommendedBecause = numberOfRecommendedBecause;
 		this.neighborhoodThreshold = neighborhoodThreshold;
 		this.isCachingRecommender = isCachingRecommender;
+		this.isItemPreComputationEnabled = isItemPreComputationEnabled;
 	}
 
 	public boolean isCachingRecommender() {
@@ -58,5 +62,21 @@ public class AdditionalRecommendationSettings {
 
 	public void setNeighborhoodThreshold(double neighborhoodThreshold) {
 		this.neighborhoodThreshold = neighborhoodThreshold;
+	}
+
+	public boolean isItemPreComputationEnabled() {
+		return isItemPreComputationEnabled;
+	}
+
+	public void setItemPreComputationEnabled(boolean isItemPreComputationEnabled) {
+		this.isItemPreComputationEnabled = isItemPreComputationEnabled;
+	}
+
+	public SimilarityMetric getSimilarityMetricForPreComputation() {
+		return similarityMetricForPreComputation;
+	}
+
+	public void setSimilarityMetricForPreComputation(SimilarityMetric similarityMetricForPreComputation) {
+		this.similarityMetricForPreComputation = similarityMetricForPreComputation;
 	}
 }
