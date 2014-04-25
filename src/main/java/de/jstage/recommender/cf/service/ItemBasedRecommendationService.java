@@ -5,7 +5,6 @@ import de.jstage.recommender.cf.recommendationMisc.SimilarityMetric;
 import org.apache.mahout.cf.taste.common.TasteException;
 import org.apache.mahout.cf.taste.eval.RecommenderBuilder;
 import org.apache.mahout.cf.taste.impl.recommender.GenericItemBasedRecommender;
-import org.apache.mahout.cf.taste.impl.similarity.CachingItemSimilarity;
 import org.apache.mahout.cf.taste.impl.similarity.CityBlockSimilarity;
 import org.apache.mahout.cf.taste.impl.similarity.EuclideanDistanceSimilarity;
 import org.apache.mahout.cf.taste.impl.similarity.GenericItemSimilarity;
@@ -69,13 +68,13 @@ public class ItemBasedRecommendationService extends AbstractCfRecommendationServ
 	}
 
 	public RecommenderBuilder createRecommenderBuilder(ItemSimilarity similarity) throws TasteException {
-		return model -> new GenericItemBasedRecommender(model, new CachingItemSimilarity(similarity, dataModel));
+		return model -> new GenericItemBasedRecommender(model, similarity);
 	}
 
 	@Bean(name = "preComputedItemSimilarity")
 	public ItemSimilarity createPreComputedItemSimilarity() throws TasteException, FileNotFoundException {
 		if (recommendationSettings.isItemPreComputationEnabled()) {
-			SimilarityMetric similarityMetric = SimilarityMetric.valueOf("PEARSON_CORRELATION");
+			SimilarityMetric similarityMetric = SimilarityMetric.valueOf("LOGLIKELIHOOD_SIMILARITY");
 			RecommenderBuilder builder = getRecommenderBuilder(similarityMetric);
 			ItemBasedRecommender itemBasedRecommender = (ItemBasedRecommender) builder.buildRecommender(dataModel);
 			String pathToPreComputedFile = preComputationService.preComputeSimilarities(itemBasedRecommender);
@@ -84,7 +83,7 @@ public class ItemBasedRecommendationService extends AbstractCfRecommendationServ
 			Collection<GenericItemSimilarity.ItemItemSimilarity> correlations = bufferedReader.lines()
 					.map(mapToItemItemSimilarity)
 					.collect(Collectors.toList());
-			return new CachingItemSimilarity(new GenericItemSimilarity(correlations),dataModel.getNumItems());
+			return new GenericItemSimilarity(correlations);
 		} else {
 			return null;
 		}
@@ -92,7 +91,7 @@ public class ItemBasedRecommendationService extends AbstractCfRecommendationServ
 
 	private static Function<String, GenericItemSimilarity.ItemItemSimilarity> mapToItemItemSimilarity = (line) -> {
 		String[] row = line.split(",");
-		return new GenericItemSimilarity.ItemItemSimilarity(Long.parseLong(row[0]), Long.parseLong(row[1]), Double.parseDouble(row[2]));
+		return new GenericItemSimilarity.ItemItemSimilarity(
+				Long.parseLong(row[0]), Long.parseLong(row[1]), Double.parseDouble(row[2]));
 	};
 }
-

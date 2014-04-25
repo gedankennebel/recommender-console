@@ -6,7 +6,8 @@ apply plugin: 'groovy'
 apply plugin: 'base'
 
 jettyRun.contextPath = '/'
-[jettyRun, jettyStop]*.stopPort = 8081
+jettyRun.httpPort = 8090
+[jettyRun, jettyStop]*.stopPort = 8085
 [jettyRun, jettyStop]*.stopKey = 'lol'
 
 repositories {
