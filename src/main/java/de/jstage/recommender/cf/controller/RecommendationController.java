@@ -7,6 +7,8 @@ import de.jstage.recommender.cf.recommendationMisc.RecommendationType;
 import de.jstage.recommender.cf.recommendationMisc.SimilarityMetric;
 import de.jstage.recommender.cf.service.CollaborativeFilteringRecommendationService;
 import org.apache.mahout.cf.taste.common.TasteException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,13 +30,23 @@ public class RecommendationController {
 	public RecommendationResponse recommendItems(@RequestParam int howMany, @RequestParam RecommendationType recommendationType,
 												 @RequestParam SimilarityMetric similarityMetric, @RequestParam long userId) throws TasteException {
 		settings.setNumberOfRecommendation(howMany);
-		return cfRecommendationService.
-				getRecommendations(new RecommendationParameters(recommendationType, similarityMetric, howMany, userId));
+		return cfRecommendationService.getRecommendations(new RecommendationParameters(recommendationType, similarityMetric, howMany, userId));
 	}
 
 	@RequestMapping(value = "/because", method = RequestMethod.GET)
 	public RecommendationResponse recommendedBecause(@RequestParam SimilarityMetric similarityMetric, @RequestParam long userId, @RequestParam long itemId) throws TasteException {
-		return cfRecommendationService.
-				getRecommendedBecause(new RecommendationParameters(similarityMetric, userId, itemId));
+		return cfRecommendationService.getRecommendedBecause(new RecommendationParameters(similarityMetric, userId, itemId));
+	}
+
+	@RequestMapping(value = "/similar", method = RequestMethod.GET)
+	public RecommendationResponse mostSimilarItems(@RequestParam SimilarityMetric similarityMetric, @RequestParam long itemId, @RequestParam int howMany) throws TasteException {
+		return cfRecommendationService.getMostSimilarItems(new RecommendationParameters(similarityMetric, itemId, howMany));
+	}
+
+	@RequestMapping(value = "/refresh", method = RequestMethod.GET)
+	public ResponseEntity<String> refresh(@RequestParam RecommendationType recommendationType, @RequestParam SimilarityMetric similarityMetric) throws TasteException {
+		cfRecommendationService.refresh(recommendationType, similarityMetric);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 }
+

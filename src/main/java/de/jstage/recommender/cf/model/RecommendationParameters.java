@@ -17,6 +17,12 @@ public class RecommendationParameters {
 		this.itemId = itemId;
 	}
 
+	public RecommendationParameters(SimilarityMetric appliedSimilarity, long itemId, int howMany) {
+		this.appliedSimilarity = appliedSimilarity;
+		this.howMany = howMany;
+		this.itemId = itemId;
+	}
+
 	public RecommendationParameters(RecommendationType recommendationType, SimilarityMetric appliedSimilarity, int howMany, long userId) {
 		this.recommendationType = recommendationType;
 		this.appliedSimilarity = appliedSimilarity;

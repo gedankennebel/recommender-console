@@ -16,15 +16,20 @@ import org.apache.mahout.cf.taste.impl.recommender.CachingRecommender;
 import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.apache.mahout.cf.taste.recommender.Recommender;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import javax.inject.Inject;
 import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 public abstract class AbstractCfRecommendationService implements RecommendationService {
 
 	@Inject
 	protected DataModel dataModel;
+
+	@Inject
+	private ConsoleMetaDataService consoleMetaDataService;
 
 	@Inject
 	protected AdditionalRecommendationSettings recommendationSettings;
@@ -65,7 +70,22 @@ public abstract class AbstractCfRecommendationService implements RecommendationS
 		}
 	}
 
+	public void refresh(SimilarityMetric metric) throws TasteException {
+		getRecommender(metric).refresh(null);
+		consoleMetaDataService.createConsoleMetaData();
+	}
+
+	// every 15min (60 * 1_000 * 15)
+	@Scheduled(fixedRate = 900_000)
+	public void refreshPeriodically() throws TasteException {
+		for (Map.Entry<SimilarityMetric, Recommender> RecommenderEntry : recommendationTyeMap.entrySet()) {
+			refresh(RecommenderEntry.getKey());
+		}
+		consoleMetaDataService.createConsoleMetaData();
+	}
+
 	protected Recommender getRecommender(SimilarityMetric similarityMetric) throws TasteException {
+
 		if (recommendationTyeMap != null) {
 			return (recommendationTyeMap.get(similarityMetric) != null) ?
 					recommendationTyeMap.get(similarityMetric) : putAndReturnRecommender(similarityMetric);

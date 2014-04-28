@@ -45,6 +45,15 @@ public class CollaborativeFilteringRecommendationService {
 		return new RecommendationResponse(param, recommendedBecauseList);
 	}
 
+	public RecommendationResponse getMostSimilarItems(RecommendationParameters param) throws TasteException {
+		List<RecommendedItem> mostSimilarItems = ((ItemBasedRecommendationService) itemBasedRecommendationService).getMostSimilarItems(param);
+		return new RecommendationResponse(param, mostSimilarItems);
+	}
+
+	public void refresh(RecommendationType recommendationType, SimilarityMetric metric) throws TasteException {
+		getRecommenderService(recommendationType).refresh(metric);
+	}
+
 	private RecommendationService getRecommenderService(RecommendationType recommendationType) {
 		switch (recommendationType) {
 			case USER_BASED:

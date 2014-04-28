@@ -19,4 +19,6 @@ public interface RecommendationService {
 	IRStatistics getIRStatistics(EvaluationParameters param) throws TasteException;
 
 	double getEvaluationScore(EvaluationParameters param) throws TasteException;
+
+	void refresh(SimilarityMetric similarityMetric) throws TasteException;
 }

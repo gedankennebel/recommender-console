@@ -40,9 +40,16 @@ public class ItemBasedRecommendationService extends AbstractCfRecommendationServ
 	private ItemSimilarity preComputedItemSimilarity;
 
 	public List<RecommendedItem> getRecommendedBecause(RecommendationParameters param) throws TasteException {
-		ItemBasedRecommender itemBasedrecommender = ((ItemBasedRecommender) getRecommender(param.getAppliedSimilarity()));
-		return itemBasedrecommender
+		return getItemBasedRecommender(param.getAppliedSimilarity())
 				.recommendedBecause(param.getUserId(), param.getItemId(), recommendationSettings.getNumberOfRecommendedBecause());
+	}
+
+	public List<RecommendedItem> getMostSimilarItems(RecommendationParameters param) throws TasteException {
+		return getItemBasedRecommender(param.getAppliedSimilarity()).mostSimilarItems(param.getItemId(), param.getHowMany());
+	}
+
+	private ItemBasedRecommender getItemBasedRecommender(SimilarityMetric similarityMetric) throws TasteException {
+		return (ItemBasedRecommender) getRecommender(similarityMetric);
 	}
 
 	@Override
