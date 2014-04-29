@@ -40,23 +40,23 @@ public class ComputingTimeAspect {
 		return proceed;
 	}
 
-	@Around("execution(public * de.jstage.recommender.cf.service.AbstractCfRecommendationService.refresh(..))")
-	public Object measureExplicitRefresh(ProceedingJoinPoint joinPoint) throws Throwable {
-		long start = System.nanoTime();
-		Object proceed = joinPoint.proceed();
-		long end = System.nanoTime();
-		log.info("Explicit refresh took : " + getCalculationTimeInMilliseconds(start, end) + "ms");
-		return proceed;
-	}
+//	@Around("execution(public * de.jstage.recommender.cf.service.AbstractCfRecommendationService.refresh(..))")
+//	public Object measureExplicitRefresh(ProceedingJoinPoint joinPoint) throws Throwable {
+//		long start = System.nanoTime();
+//		Object proceed = joinPoint.proceed();
+//		long end = System.nanoTime();
+//		log.info("Explicit refresh took : " + getCalculationTimeInMilliseconds(start, end) + "ms");
+//		return proceed;
+//	}
 
-	@Around("execution(public * de.jstage.recommender.cf.service.AbstractCfRecommendationService.refreshPeriodically())")
-	public Object measurePeriodicallyRefresh(ProceedingJoinPoint joinPoint) throws Throwable {
-		long start = System.nanoTime();
-		Object proceed = joinPoint.proceed();
-		long end = System.nanoTime();
-		log.info("Full periodical refresh took " + getCalculationTimeInMilliseconds(start, end) + "ms");
-		return proceed;
-	}
+//	@Around("execution(public * de.jstage.recommender.cf.service.AbstractCfRecommendationService.fullRefresh())")
+//	public Object measurePeriodicallyRefresh(ProceedingJoinPoint joinPoint) throws Throwable {
+//		long start = System.nanoTime();
+//		Object proceed = joinPoint.proceed();
+//		long end = System.nanoTime();
+//		log.info("Full periodical refresh took " + getCalculationTimeInMilliseconds(start, end) + "ms");
+//		return proceed;
+//	}
 
 	@Around("execution(public * de.jstage.recommender.cf.config.MahoutDataModelConfig.*())")
 	public Object measureDataModelCreationTime(ProceedingJoinPoint joinPoint) throws Throwable {

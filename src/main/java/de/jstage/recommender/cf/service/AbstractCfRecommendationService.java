@@ -76,10 +76,10 @@ public abstract class AbstractCfRecommendationService implements RecommendationS
 		consoleMetaDataService.createConsoleMetaData();
 	}
 
-	// every 15min (60 * 1_000 * 15)
+	// every 15min (60 * 1_000 * 15 = 900_000)
 	@Override
-	@Scheduled(fixedRate = 900_000)
-	public void refreshPeriodically() throws TasteException {
+	@Scheduled(fixedRate = 30_000)
+	public void fullRefresh() throws TasteException {
 		for (Map.Entry<SimilarityMetric, Recommender> RecommenderEntry : recommendationTyeMap.entrySet()) {
 			refresh(RecommenderEntry.getKey());
 		}

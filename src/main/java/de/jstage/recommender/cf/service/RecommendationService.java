@@ -22,5 +22,5 @@ public interface RecommendationService {
 
 	void refresh(SimilarityMetric similarityMetric) throws TasteException;
 
-	void refreshPeriodically() throws TasteException;
+	void fullRefresh() throws TasteException;
 }

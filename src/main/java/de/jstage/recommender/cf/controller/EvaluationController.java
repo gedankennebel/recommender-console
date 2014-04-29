@@ -20,7 +20,7 @@ import javax.inject.Inject;
 public class EvaluationController {
 
 	@Inject
-	CollaborativeFilteringRecommendationService cfRecommendationService;
+	private CollaborativeFilteringRecommendationService cfRecommendationService;
 
 	@RequestMapping(value = "/loadTest", method = RequestMethod.GET)
 	public LoadStatistics getLoadStatistics(@RequestParam RecommendationType recommendationType, @RequestParam SimilarityMetric similarityMetric)

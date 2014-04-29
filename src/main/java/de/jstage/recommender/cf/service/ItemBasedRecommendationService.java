@@ -43,7 +43,6 @@ public class ItemBasedRecommendationService extends AbstractCfRecommendationServ
 	private PreComputationService preComputationService;
 
 	@Inject
-	@Lazy
 	private ItemSimilarity preComputedItemSimilarity;
 
 	public List<RecommendedItem> getRecommendedBecause(RecommendationParameters param) throws TasteException {
@@ -88,7 +87,6 @@ public class ItemBasedRecommendationService extends AbstractCfRecommendationServ
 		return model -> new GenericItemBasedRecommender(model, similarity);
 	}
 
-	@Lazy
 	@Bean(name = "preComputedItemSimilarity")
 	public ItemSimilarity createPreComputedItemSimilarity() throws TasteException, FileNotFoundException {
 		if (recommendationSettings.isItemPreComputationEnabled()) {
