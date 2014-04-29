@@ -70,12 +70,14 @@ public abstract class AbstractCfRecommendationService implements RecommendationS
 		}
 	}
 
+	@Override
 	public void refresh(SimilarityMetric metric) throws TasteException {
 		getRecommender(metric).refresh(null);
 		consoleMetaDataService.createConsoleMetaData();
 	}
 
 	// every 15min (60 * 1_000 * 15)
+	@Override
 	@Scheduled(fixedRate = 900_000)
 	public void refreshPeriodically() throws TasteException {
 		for (Map.Entry<SimilarityMetric, Recommender> RecommenderEntry : recommendationTyeMap.entrySet()) {

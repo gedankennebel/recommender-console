@@ -21,4 +21,6 @@ public interface RecommendationService {
 	double getEvaluationScore(EvaluationParameters param) throws TasteException;
 
 	void refresh(SimilarityMetric similarityMetric) throws TasteException;
+
+	void refreshPeriodically() throws TasteException;
 }

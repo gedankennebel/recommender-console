@@ -15,9 +15,13 @@ import org.apache.mahout.cf.taste.impl.similarity.UncenteredCosineSimilarity;
 import org.apache.mahout.cf.taste.recommender.ItemBasedRecommender;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.apache.mahout.cf.taste.similarity.ItemSimilarity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import java.io.BufferedReader;
 import java.io.File;
@@ -33,10 +37,13 @@ import java.util.stream.Collectors;
 @Service("itemBased")
 public class ItemBasedRecommendationService extends AbstractCfRecommendationService {
 
+	private static final Logger log = LoggerFactory.getLogger(ItemBasedRecommendationService.class);
+
 	@Inject
 	private PreComputationService preComputationService;
 
 	@Inject
+	@Lazy
 	private ItemSimilarity preComputedItemSimilarity;
 
 	public List<RecommendedItem> getRecommendedBecause(RecommendationParameters param) throws TasteException {
@@ -68,8 +75,11 @@ public class ItemBasedRecommendationService extends AbstractCfRecommendationServ
 			case UNCENTERED_COSINE_SIMILARITY:
 				return createRecommenderBuilder(new UncenteredCosineSimilarity(dataModel));
 			case PRE_COMPUTED_SIMILARITY:
-				return createRecommenderBuilder(preComputedItemSimilarity);
+				if (recommendationSettings.isItemPreComputationEnabled()) {
+					return createRecommenderBuilder(preComputedItemSimilarity);
+				}
 			default:
+				log.warn("Run into switch -> default: creating default similarity (Pearson)");
 				return createRecommenderBuilder(new PearsonCorrelationSimilarity(dataModel));
 		}
 	}
@@ -78,6 +88,7 @@ public class ItemBasedRecommendationService extends AbstractCfRecommendationServ
 		return model -> new GenericItemBasedRecommender(model, similarity);
 	}
 
+	@Lazy
 	@Bean(name = "preComputedItemSimilarity")
 	public ItemSimilarity createPreComputedItemSimilarity() throws TasteException, FileNotFoundException {
 		if (recommendationSettings.isItemPreComputationEnabled()) {
