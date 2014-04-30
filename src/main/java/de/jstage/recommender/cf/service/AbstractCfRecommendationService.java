@@ -86,21 +86,19 @@ public abstract class AbstractCfRecommendationService implements RecommendationS
 	}
 
 	// every 15min (60 * 1_000 * 15 = 900_000)
-	@Override
 	@Scheduled(fixedRate = 30_000)
-	public void autoRefresh() throws TasteException {
-		log.info("\nPeriodical automatic full refresh triggered");
+	private void autoRefresh() throws TasteException {
+		log.info("\n\nPeriodical automatic full refresh triggered");
 		long start = System.nanoTime();
 		for (Map.Entry<SimilarityMetric, Recommender> RecommenderEntry : recommendationTyeMap.entrySet()) {
-			refresh(RecommenderEntry.getKey());
+			getRecommender(RecommenderEntry.getKey()).refresh(null);
 		}
 		double end = ComputingTimeAspect.getCalculationTimeInMilliseconds(start, System.nanoTime());
-		log.info("\nPeriodical refresh took " + end + "ms");
+		log.info("\n\nPeriodical refresh took " + end + "ms");
 		consoleMetaDataService.createConsoleMetaData();
 	}
 
 	protected Recommender getRecommender(SimilarityMetric similarityMetric) throws TasteException {
-
 		if (recommendationTyeMap != null) {
 			return (recommendationTyeMap.get(similarityMetric) != null) ?
 					recommendationTyeMap.get(similarityMetric) : putAndReturnRecommender(similarityMetric);
