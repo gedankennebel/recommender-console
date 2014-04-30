@@ -1,5 +1,6 @@
 package de.jstage.recommender.cf.service;
 
+import de.jstage.recommender.cf.aspect.ComputingTimeAspect;
 import de.jstage.recommender.cf.model.EvaluationParameters;
 import de.jstage.recommender.cf.model.RecommendationParameters;
 import de.jstage.recommender.cf.recommendationMisc.AdditionalRecommendationSettings;
@@ -16,6 +17,8 @@ import org.apache.mahout.cf.taste.impl.recommender.CachingRecommender;
 import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.apache.mahout.cf.taste.recommender.Recommender;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import javax.inject.Inject;
@@ -24,6 +27,8 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class AbstractCfRecommendationService implements RecommendationService {
+
+	private static final Logger log = LoggerFactory.getLogger(AbstractCfRecommendationService.class);
 
 	@Inject
 	protected DataModel dataModel;
@@ -72,17 +77,25 @@ public abstract class AbstractCfRecommendationService implements RecommendationS
 
 	@Override
 	public void refresh(SimilarityMetric metric) throws TasteException {
+		log.info("\nExplicit refresh triggered");
+		long start = System.nanoTime();
 		getRecommender(metric).refresh(null);
 		consoleMetaDataService.createConsoleMetaData();
+		double end = ComputingTimeAspect.getCalculationTimeInMilliseconds(start, System.nanoTime());
+		log.info("\nExplicit refresh took " + end + "ms");
 	}
 
 	// every 15min (60 * 1_000 * 15 = 900_000)
 	@Override
 	@Scheduled(fixedRate = 30_000)
-	public void fullRefresh() throws TasteException {
+	public void autoRefresh() throws TasteException {
+		log.info("\nPeriodical automatic full refresh triggered");
+		long start = System.nanoTime();
 		for (Map.Entry<SimilarityMetric, Recommender> RecommenderEntry : recommendationTyeMap.entrySet()) {
 			refresh(RecommenderEntry.getKey());
 		}
+		double end = ComputingTimeAspect.getCalculationTimeInMilliseconds(start, System.nanoTime());
+		log.info("\nPeriodical refresh took " + end + "ms");
 		consoleMetaDataService.createConsoleMetaData();
 	}
 

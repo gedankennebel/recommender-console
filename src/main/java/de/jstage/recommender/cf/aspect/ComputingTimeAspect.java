@@ -49,7 +49,7 @@ public class ComputingTimeAspect {
 //		return proceed;
 //	}
 
-//	@Around("execution(public * de.jstage.recommender.cf.service.AbstractCfRecommendationService.fullRefresh())")
+//	@Around("execution(public * de.jstage.recommender.cf.service.AbstractCfRecommendationService.autoRefresh())")
 //	public Object measurePeriodicallyRefresh(ProceedingJoinPoint joinPoint) throws Throwable {
 //		long start = System.nanoTime();
 //		Object proceed = joinPoint.proceed();
