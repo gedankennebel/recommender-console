@@ -1,6 +1,6 @@
 package de.jstage.recommender.cf.aspect;
 
-import de.jstage.recommender.cf.model.RecommendationResponse;
+import de.jstage.recommender.cf.domain.RecommendationResponse;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -64,7 +64,7 @@ public class ComputingTimeAspect {
 		Object proceed = joinPoint.proceed();
 		long end = System.nanoTime();
 		dataModelCreationTime = getCalculationTimeInSeconds(start, end);
-		log.info("DataModel created in " + dataModelCreationTime + "seconds");
+		log.info("DataModel created in " + dataModelCreationTime + " seconds");
 		return proceed;
 	}
 

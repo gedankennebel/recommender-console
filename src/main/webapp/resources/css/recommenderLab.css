@@ -5,6 +5,7 @@ body {
 	background: linear-gradient(to bottom right, black, deepskyblue) no-repeat;
 	color: white;
 	margin: 0 auto;
+	height: 100%;
 }
 
 #logo_image {
@@ -60,7 +61,7 @@ h3 {
 }
 
 .column {
-	height: 24em !important;
+	height: 30em !important;
 	text-align: center;
 	width: 49%;
 	overflow: auto;

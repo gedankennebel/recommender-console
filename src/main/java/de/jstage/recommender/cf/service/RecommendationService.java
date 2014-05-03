@@ -1,7 +1,8 @@
 package de.jstage.recommender.cf.service;
 
-import de.jstage.recommender.cf.model.EvaluationParameters;
-import de.jstage.recommender.cf.model.RecommendationParameters;
+import de.jstage.recommender.cf.domain.EvaluationParameters;
+import de.jstage.recommender.cf.domain.EvaluationResult;
+import de.jstage.recommender.cf.domain.RecommendationParameters;
 import de.jstage.recommender.cf.recommendationMisc.SimilarityMetric;
 import org.apache.mahout.cf.taste.common.TasteException;
 import org.apache.mahout.cf.taste.eval.IRStatistics;
@@ -18,7 +19,7 @@ public interface RecommendationService {
 
 	IRStatistics getIRStatistics(EvaluationParameters param) throws TasteException;
 
-	double getEvaluationScore(EvaluationParameters param) throws TasteException;
+	EvaluationResult getEvaluationScore(EvaluationParameters param) throws TasteException;
 
 	void refresh(SimilarityMetric similarityMetric) throws TasteException;
 }

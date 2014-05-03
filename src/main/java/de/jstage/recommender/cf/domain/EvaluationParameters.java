@@ -1,4 +1,4 @@
-package de.jstage.recommender.cf.model;
+package de.jstage.recommender.cf.domain;
 
 import de.jstage.recommender.cf.recommendationMisc.EvaluatorType;
 import de.jstage.recommender.cf.recommendationMisc.RecommendationType;
@@ -28,6 +28,13 @@ public class EvaluationParameters {
 		this.similarityMetric = similarityMetric;
 		this.recallAt = recallAt;
 		this.evaluationPercentage = evaluationPercentage;
+	}
+
+	public EvaluationParameters(RecommendationType recommendationType, EvaluatorType evaluatorType, double trainingPercentage, double evaluationPercentage) {
+		this.recommendationType = recommendationType;
+		this.trainingPercentage = trainingPercentage;
+		this.evaluationPercentage = evaluationPercentage;
+		this.evaluatorType = evaluatorType;
 	}
 
 	public RecommendationType getRecommendationType() {

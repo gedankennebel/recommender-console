@@ -1,8 +1,8 @@
 package de.jstage.recommender.cf.service;
 
 import de.jstage.recommender.cf.aspect.ComputingTimeAspect;
-import de.jstage.recommender.cf.model.ConsoleMetaData;
-import de.jstage.recommender.cf.model.User;
+import de.jstage.recommender.cf.domain.ConsoleMetaData;
+import de.jstage.recommender.cf.domain.User;
 import de.jstage.recommender.cf.recommendationMisc.RecommendationType;
 import de.jstage.recommender.cf.utils.SpliteratorUtil;
 import org.apache.mahout.cf.taste.common.TasteException;

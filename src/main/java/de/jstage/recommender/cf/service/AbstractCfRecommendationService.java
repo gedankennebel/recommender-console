@@ -1,8 +1,9 @@
 package de.jstage.recommender.cf.service;
 
 import de.jstage.recommender.cf.aspect.ComputingTimeAspect;
-import de.jstage.recommender.cf.model.EvaluationParameters;
-import de.jstage.recommender.cf.model.RecommendationParameters;
+import de.jstage.recommender.cf.domain.EvaluationParameters;
+import de.jstage.recommender.cf.domain.EvaluationResult;
+import de.jstage.recommender.cf.domain.RecommendationParameters;
 import de.jstage.recommender.cf.recommendationMisc.AdditionalRecommendationSettings;
 import de.jstage.recommender.cf.recommendationMisc.SimilarityMetric;
 import org.apache.mahout.cf.taste.common.TasteException;
@@ -59,19 +60,24 @@ public abstract class AbstractCfRecommendationService implements RecommendationS
 	}
 
 	@Override
-	public double getEvaluationScore(EvaluationParameters param) throws TasteException {
+	public EvaluationResult getEvaluationScore(EvaluationParameters param) throws TasteException {
 		double trainingPercentage = param.getTrainingPercentage();
 		double evaluationPercentage = param.getEvaluationPercentage();
 		SimilarityMetric metric = param.getSimilarityMetric();
+		long start = System.nanoTime();
 		switch (param.getEvaluatorType()) {
 			case AVERAGE_ABSOLUTE_DIFFERENCE:
-				return new AverageAbsoluteDifferenceRecommenderEvaluator()
+				double score = new AverageAbsoluteDifferenceRecommenderEvaluator()
 						.evaluate(getRecommenderBuilder(metric), null, dataModel, trainingPercentage, evaluationPercentage);
+				return new EvaluationResult(param.getRecommendationType().getDisplayName(), metric.getDisplayName(), score,
+						ComputingTimeAspect.getCalculationTimeInSeconds(start, System.nanoTime()));
 			case ROOT_MEAN_SQUARE:
-				return new RMSRecommenderEvaluator()
+				double rmsScore = new RMSRecommenderEvaluator()
 						.evaluate(getRecommenderBuilder(metric), null, dataModel, trainingPercentage, evaluationPercentage);
+				return new EvaluationResult(param.getRecommendationType().getDisplayName(), metric.getDisplayName(), rmsScore,
+						ComputingTimeAspect.getCalculationTimeInSeconds(start, System.nanoTime()));
 			default:
-				return 0;
+				return new EvaluationResult();
 		}
 	}
 
@@ -86,7 +92,7 @@ public abstract class AbstractCfRecommendationService implements RecommendationS
 	}
 
 	// every 15min (60 * 1_000 * 15 = 900_000)
-	@Scheduled(fixedRate = 30_000)
+	@Scheduled(fixedRate = 900_000)
 	private void autoRefresh() throws TasteException {
 		log.info("\n\nPeriodical automatic full refresh triggered");
 		long start = System.nanoTime();

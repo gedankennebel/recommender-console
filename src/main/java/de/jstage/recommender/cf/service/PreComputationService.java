@@ -24,7 +24,7 @@ public class PreComputationService {
 			if (resultFile.exists()) {
 				resultFile.delete();
 			}
-			BatchItemSimilarities batchJob = new MultithreadedBatchItemSimilarities(recommender, 1_682);
+			BatchItemSimilarities batchJob = new MultithreadedBatchItemSimilarities(recommender, 15);
 			int numSimilarities = batchJob.computeItemSimilarities(Runtime.getRuntime().availableProcessors(), 1,
 					new FileSimilarItemsWriter(resultFile));
 			pathToAbsolutePath = resultFile.getAbsolutePath();

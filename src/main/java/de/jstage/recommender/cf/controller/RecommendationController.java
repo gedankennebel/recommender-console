@@ -1,7 +1,7 @@
 package de.jstage.recommender.cf.controller;
 
-import de.jstage.recommender.cf.model.RecommendationParameters;
-import de.jstage.recommender.cf.model.RecommendationResponse;
+import de.jstage.recommender.cf.domain.RecommendationParameters;
+import de.jstage.recommender.cf.domain.RecommendationResponse;
 import de.jstage.recommender.cf.recommendationMisc.AdditionalRecommendationSettings;
 import de.jstage.recommender.cf.recommendationMisc.RecommendationType;
 import de.jstage.recommender.cf.recommendationMisc.SimilarityMetric;

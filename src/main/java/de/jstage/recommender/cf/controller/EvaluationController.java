@@ -1,6 +1,8 @@
 package de.jstage.recommender.cf.controller;
 
-import de.jstage.recommender.cf.model.EvaluationParameters;
+import de.jstage.recommender.cf.domain.EvaluationParameters;
+import de.jstage.recommender.cf.domain.EvaluationResult;
+import de.jstage.recommender.cf.domain.FullEvaluationResult;
 import de.jstage.recommender.cf.recommendationMisc.EvaluatorType;
 import de.jstage.recommender.cf.recommendationMisc.RecommendationType;
 import de.jstage.recommender.cf.recommendationMisc.SimilarityMetric;
@@ -36,9 +38,16 @@ public class EvaluationController {
 	}
 
 	@RequestMapping(value = "/score")
-	public double getEvaluationScore(@RequestParam RecommendationType recommendationType, @RequestParam SimilarityMetric similarityMetric,
+	public EvaluationResult getEvaluationScore(@RequestParam RecommendationType recommendationType, @RequestParam SimilarityMetric similarityMetric,
 									 @RequestParam EvaluatorType evaluatorType, @RequestParam double trainingPercentage, @RequestParam double evaluatePercentage) throws TasteException {
 		return cfRecommendationService.
 				getEvaluationScore(new EvaluationParameters(recommendationType, similarityMetric, evaluatorType, trainingPercentage, evaluatePercentage));
+	}
+
+	@RequestMapping(value = "/fullScore")
+	public FullEvaluationResult runFullEvaluation(@RequestParam RecommendationType recommendationType, @RequestParam EvaluatorType evaluatorType,
+												  @RequestParam double trainingPercentage, @RequestParam double evaluatePercentage) throws TasteException {
+		return cfRecommendationService.
+				performFullEvaluation(new EvaluationParameters(recommendationType, evaluatorType, trainingPercentage, evaluatePercentage));
 	}
 }

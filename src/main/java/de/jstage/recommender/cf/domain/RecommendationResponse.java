@@ -1,4 +1,4 @@
-package de.jstage.recommender.cf.model;
+package de.jstage.recommender.cf.domain;
 
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 

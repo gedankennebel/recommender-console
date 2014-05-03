@@ -1,4 +1,4 @@
-package de.jstage.recommender.cf.model;
+package de.jstage.recommender.cf.domain;
 
 import de.jstage.recommender.cf.recommendationMisc.RecommendationType;
 import de.jstage.recommender.cf.recommendationMisc.SimilarityMetric;
