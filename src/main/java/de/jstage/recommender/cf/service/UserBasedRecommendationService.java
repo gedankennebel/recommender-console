@@ -6,6 +6,7 @@ import org.apache.mahout.cf.taste.common.TasteException;
 import org.apache.mahout.cf.taste.eval.RecommenderBuilder;
 import org.apache.mahout.cf.taste.impl.neighborhood.NearestNUserNeighborhood;
 import org.apache.mahout.cf.taste.impl.neighborhood.ThresholdUserNeighborhood;
+import org.apache.mahout.cf.taste.impl.recommender.CachingRecommender;
 import org.apache.mahout.cf.taste.impl.recommender.GenericUserBasedRecommender;
 import org.apache.mahout.cf.taste.impl.similarity.CityBlockSimilarity;
 import org.apache.mahout.cf.taste.impl.similarity.EuclideanDistanceSimilarity;
@@ -46,7 +47,11 @@ public class UserBasedRecommendationService extends AbstractCfRecommendationServ
 
 	public RecommenderBuilder createRecommenderBuilder(UserSimilarity similarity) throws TasteException {
 		UserNeighborhood neighborhood = getUserNeighborhood(recommendationSettings, similarity, dataModel);
-		return model -> new GenericUserBasedRecommender(model, neighborhood, similarity);
+		if (recommendationSettings.isCachingRecommender()) {
+			return model -> new CachingRecommender(new GenericUserBasedRecommender(model, neighborhood, similarity));
+		} else {
+			return model -> new GenericUserBasedRecommender(model, neighborhood, similarity);
+		}
 	}
 
 	private UserNeighborhood getUserNeighborhood(AdditionalRecommendationSettings settings, UserSimilarity similarity, DataModel dataModel) throws TasteException {

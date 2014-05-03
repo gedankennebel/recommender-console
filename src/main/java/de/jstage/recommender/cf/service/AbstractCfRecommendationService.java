@@ -14,7 +14,6 @@ import org.apache.mahout.cf.taste.impl.eval.GenericRecommenderIRStatsEvaluator;
 import org.apache.mahout.cf.taste.impl.eval.LoadEvaluator;
 import org.apache.mahout.cf.taste.impl.eval.LoadStatistics;
 import org.apache.mahout.cf.taste.impl.eval.RMSRecommenderEvaluator;
-import org.apache.mahout.cf.taste.impl.recommender.CachingRecommender;
 import org.apache.mahout.cf.taste.model.DataModel;
 import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.apache.mahout.cf.taste.recommender.Recommender;
@@ -115,16 +114,8 @@ public abstract class AbstractCfRecommendationService implements RecommendationS
 	}
 
 	private Recommender putAndReturnRecommender(SimilarityMetric similarityMetric) throws TasteException {
-		recommendationTyeMap.put(similarityMetric, buildRecommender(getRecommenderBuilder(similarityMetric)));
+		recommendationTyeMap.put(similarityMetric, getRecommenderBuilder(similarityMetric).buildRecommender(dataModel));
 		return recommendationTyeMap.get(similarityMetric);
-	}
-
-	private Recommender buildRecommender(RecommenderBuilder builder) throws TasteException {
-		if (recommendationSettings.isCachingRecommender()) {
-			return new CachingRecommender(builder.buildRecommender((dataModel)));
-		} else {
-			return builder.buildRecommender((dataModel));
-		}
 	}
 
 	protected abstract RecommenderBuilder getRecommenderBuilder(SimilarityMetric similarityMetric) throws TasteException;

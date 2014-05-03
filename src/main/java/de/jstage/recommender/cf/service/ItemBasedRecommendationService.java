@@ -1,12 +1,11 @@
 package de.jstage.recommender.cf.service;
 
 import de.jstage.recommender.cf.domain.RecommendationParameters;
+import de.jstage.recommender.cf.mahout.CachingItemRecommender;
 import de.jstage.recommender.cf.recommendationMisc.SimilarityMetric;
 import org.apache.mahout.cf.taste.common.TasteException;
 import org.apache.mahout.cf.taste.eval.RecommenderBuilder;
 import org.apache.mahout.cf.taste.impl.recommender.GenericItemBasedRecommender;
-import org.apache.mahout.cf.taste.impl.recommender.SamplingCandidateItemsStrategy;
-import org.apache.mahout.cf.taste.impl.similarity.CachingItemSimilarity;
 import org.apache.mahout.cf.taste.impl.similarity.CityBlockSimilarity;
 import org.apache.mahout.cf.taste.impl.similarity.EuclideanDistanceSimilarity;
 import org.apache.mahout.cf.taste.impl.similarity.GenericItemSimilarity;
@@ -84,7 +83,11 @@ public class ItemBasedRecommendationService extends AbstractCfRecommendationServ
 	}
 
 	public RecommenderBuilder createRecommenderBuilder(ItemSimilarity similarity) throws TasteException {
-		return model -> new GenericItemBasedRecommender(model, similarity);
+		if (recommendationSettings.isCachingRecommender()) {
+			return model -> new CachingItemRecommender(new GenericItemBasedRecommender(model, similarity));
+		} else {
+			return model -> new GenericItemBasedRecommender(model, similarity);
+		}
 	}
 
 	@Bean(name = "preComputedItemSimilarity")
