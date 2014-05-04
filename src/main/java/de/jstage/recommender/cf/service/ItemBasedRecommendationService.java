@@ -46,7 +46,7 @@ public class ItemBasedRecommendationService extends AbstractCfRecommendationServ
 
 	public List<RecommendedItem> getRecommendedBecause(RecommendationParameters param) throws TasteException {
 		return getItemBasedRecommender(param.getAppliedSimilarity())
-				.recommendedBecause(param.getUserId(), param.getItemId(), recommendationSettings.getNumberOfRecommendedBecause());
+				.recommendedBecause(param.getUserId(), param.getItemId(), param.getHowMany());
 	}
 
 	public List<RecommendedItem> getMostSimilarItems(RecommendationParameters param) throws TasteException {

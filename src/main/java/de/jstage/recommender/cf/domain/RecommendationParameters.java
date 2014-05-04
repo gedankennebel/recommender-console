@@ -30,6 +30,13 @@ public class RecommendationParameters {
 		this.userId = userId;
 	}
 
+	public RecommendationParameters(SimilarityMetric appliedSimilarity, long userId, long itemId, int howMany) {
+		this.appliedSimilarity = appliedSimilarity;
+		this.howMany = howMany;
+		this.userId = userId;
+		this.itemId = itemId;
+	}
+
 	public SimilarityMetric getAppliedSimilarity() {
 		return appliedSimilarity;
 	}

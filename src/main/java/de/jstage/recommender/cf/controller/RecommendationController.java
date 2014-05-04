@@ -27,19 +27,19 @@ public class RecommendationController {
 	private AdditionalRecommendationSettings settings;
 
 	@RequestMapping(value = "/cf", method = RequestMethod.GET)
-	public RecommendationResponse recommendItems(@RequestParam int howMany, @RequestParam RecommendationType recommendationType,
-												 @RequestParam SimilarityMetric similarityMetric, @RequestParam long userId) throws TasteException {
+	public RecommendationResponse recommendItems(@RequestParam RecommendationType recommendationType, @RequestParam SimilarityMetric similarityMetric,
+												 @RequestParam long userId, @RequestParam(required = false, defaultValue = "6") int howMany) throws TasteException {
 		settings.setNumberOfRecommendation(howMany);
 		return cfRecommendationService.getRecommendations(new RecommendationParameters(recommendationType, similarityMetric, howMany, userId));
 	}
 
 	@RequestMapping(value = "/because", method = RequestMethod.GET)
-	public RecommendationResponse recommendedBecause(@RequestParam SimilarityMetric similarityMetric, @RequestParam long userId, @RequestParam long itemId) throws TasteException {
-		return cfRecommendationService.getRecommendedBecause(new RecommendationParameters(similarityMetric, userId, itemId));
+	public RecommendationResponse recommendedBecause(@RequestParam SimilarityMetric similarityMetric, @RequestParam long userId, @RequestParam long itemId, @RequestParam(required = false, defaultValue = "6") int howMany) throws TasteException {
+		return cfRecommendationService.getRecommendedBecause(new RecommendationParameters(similarityMetric, userId, itemId, howMany));
 	}
 
 	@RequestMapping(value = "/similar", method = RequestMethod.GET)
-	public RecommendationResponse mostSimilarItems(@RequestParam SimilarityMetric similarityMetric, @RequestParam long itemId, @RequestParam int howMany) throws TasteException {
+	public RecommendationResponse mostSimilarItems(@RequestParam SimilarityMetric similarityMetric, @RequestParam long itemId, @RequestParam(required = false, defaultValue = "6") int howMany) throws TasteException {
 		return cfRecommendationService.getMostSimilarItems(new RecommendationParameters(similarityMetric, itemId, howMany));
 	}
 
