@@ -154,7 +154,7 @@ public class CachingItemRecommender implements ItemBasedRecommender {
 
 	@Override
 	public List<RecommendedItem> mostSimilarItems(long itemID, int howMany) throws TasteException {
-		return mostSimilarItems(itemID, howMany);
+		return recommender.mostSimilarItems(itemID, howMany);
 	}
 
 	@Override
