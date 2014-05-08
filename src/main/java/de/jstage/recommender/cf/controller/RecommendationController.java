@@ -5,7 +5,7 @@ import de.jstage.recommender.cf.domain.RecommendationResponse;
 import de.jstage.recommender.cf.recommendationMisc.AdditionalRecommendationSettings;
 import de.jstage.recommender.cf.recommendationMisc.RecommendationType;
 import de.jstage.recommender.cf.recommendationMisc.SimilarityMetric;
-import de.jstage.recommender.cf.service.CollaborativeFilteringRecommendationService;
+import de.jstage.recommender.cf.service.CollaborativeFilteringService;
 import org.apache.mahout.cf.taste.common.TasteException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ import javax.inject.Inject;
 public class RecommendationController {
 
 	@Inject
-	private CollaborativeFilteringRecommendationService cfRecommendationService;
+	private CollaborativeFilteringService cfRecommendationService;
 
 	@Inject
 	private AdditionalRecommendationSettings settings;

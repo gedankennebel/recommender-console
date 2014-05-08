@@ -6,7 +6,7 @@ import de.jstage.recommender.cf.domain.FullEvaluationResult;
 import de.jstage.recommender.cf.recommendationMisc.EvaluatorType;
 import de.jstage.recommender.cf.recommendationMisc.RecommendationType;
 import de.jstage.recommender.cf.recommendationMisc.SimilarityMetric;
-import de.jstage.recommender.cf.service.CollaborativeFilteringRecommendationService;
+import de.jstage.recommender.cf.service.CollaborativeFilteringService;
 import org.apache.mahout.cf.taste.common.TasteException;
 import org.apache.mahout.cf.taste.eval.IRStatistics;
 import org.apache.mahout.cf.taste.impl.eval.LoadStatistics;
@@ -22,7 +22,7 @@ import javax.inject.Inject;
 public class EvaluationController {
 
 	@Inject
-	private CollaborativeFilteringRecommendationService cfRecommendationService;
+	private CollaborativeFilteringService cfRecommendationService;
 
 	@RequestMapping(value = "/loadTest", method = RequestMethod.GET)
 	public LoadStatistics getLoadStatistics(@RequestParam RecommendationType recommendationType, @RequestParam SimilarityMetric similarityMetric)

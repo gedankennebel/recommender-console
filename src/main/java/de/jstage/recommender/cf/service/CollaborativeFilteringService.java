@@ -22,9 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class CollaborativeFilteringRecommendationService {
+public class CollaborativeFilteringService {
 
-	private static final Logger logger = LoggerFactory.getLogger(CollaborativeFilteringRecommendationService.class);
+	private static final Logger logger = LoggerFactory.getLogger(CollaborativeFilteringService.class);
 
 	@Resource(name = "itemBased")
 	private RecommendationService itemBasedRecommendationService;
