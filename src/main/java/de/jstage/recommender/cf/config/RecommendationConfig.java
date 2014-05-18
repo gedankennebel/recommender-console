@@ -1,7 +1,7 @@
 package de.jstage.recommender.cf.config;
 
-import de.jstage.recommender.cf.recommendationMisc.AdditionalRecommendationSettings;
-import de.jstage.recommender.cf.recommendationMisc.NeighborhoodType;
+import de.jstage.recommender.cf.domain.RecommendationSettings;
+import de.jstage.recommender.cf.enums.NeighborhoodType;
 import org.apache.mahout.cf.taste.model.DataModel;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,14 +22,14 @@ public class RecommendationConfig {
 	private Environment environment;
 
 	@Bean
-	public AdditionalRecommendationSettings defaultSetting() {
+	public RecommendationSettings defaultSetting() {
 		int numberOfRecommendation = Integer.parseInt(environment.getProperty("numberOfRecommendation"));
 		int numberOfRecommendedBecause = Integer.parseInt(environment.getProperty("numberOfRecommendedBecause"));
 		double neighborhoodThreshold = Double.parseDouble(environment.getProperty("neighborhoodThreshold"));
 		boolean isCachingRecommender = Boolean.parseBoolean(environment.getProperty("cachingRecommender"));
 		boolean isItemPreComputationEnabled = Boolean.parseBoolean(environment.getProperty("isItemPreComputationEnabled"));
 		String neighorhoodType = environment.getProperty("neighborhoodType");
-		return new AdditionalRecommendationSettings(NeighborhoodType.valueOf(neighorhoodType),
+		return new RecommendationSettings(NeighborhoodType.valueOf(neighorhoodType),
 				numberOfRecommendation, numberOfRecommendedBecause, neighborhoodThreshold, isCachingRecommender,
 				isItemPreComputationEnabled);
 	}

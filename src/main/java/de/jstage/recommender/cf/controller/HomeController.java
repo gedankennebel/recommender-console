@@ -1,6 +1,6 @@
 package de.jstage.recommender.cf.controller;
 
-import de.jstage.recommender.cf.recommendationMisc.AdditionalRecommendationSettings;
+import de.jstage.recommender.cf.domain.RecommendationSettings;
 import de.jstage.recommender.cf.service.ConsoleMetaDataService;
 import org.apache.mahout.cf.taste.common.TasteException;
 import org.springframework.stereotype.Controller;
@@ -18,7 +18,7 @@ public class HomeController {
 	private ConsoleMetaDataService consoleMetaDataService;
 
 	@Inject
-	private AdditionalRecommendationSettings settings;
+	private RecommendationSettings settings;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView home() throws TasteException {

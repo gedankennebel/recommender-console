@@ -1,7 +1,7 @@
 package de.jstage.recommender.cf.controller;
 
-import de.jstage.recommender.cf.recommendationMisc.RecommendationType;
-import de.jstage.recommender.cf.recommendationMisc.SimilarityMetric;
+import de.jstage.recommender.cf.enums.RecommendationType;
+import de.jstage.recommender.cf.enums.SimilarityMetric;
 import de.jstage.recommender.cf.service.SimilarityTypeService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

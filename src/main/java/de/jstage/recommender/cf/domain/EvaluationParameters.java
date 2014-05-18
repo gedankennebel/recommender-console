@@ -1,8 +1,8 @@
 package de.jstage.recommender.cf.domain;
 
-import de.jstage.recommender.cf.recommendationMisc.EvaluatorType;
-import de.jstage.recommender.cf.recommendationMisc.RecommendationType;
-import de.jstage.recommender.cf.recommendationMisc.SimilarityMetric;
+import de.jstage.recommender.cf.enums.EvaluatorType;
+import de.jstage.recommender.cf.enums.RecommendationType;
+import de.jstage.recommender.cf.enums.SimilarityMetric;
 
 public class EvaluationParameters {
 

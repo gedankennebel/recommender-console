@@ -1,4 +1,4 @@
-package de.jstage.recommender.cf.recommendationMisc;
+package de.jstage.recommender.cf.enums;
 
 public enum NeighborhoodType {
 

@@ -1,6 +1,9 @@
-package de.jstage.recommender.cf.recommendationMisc;
+package de.jstage.recommender.cf.domain;
 
-public class AdditionalRecommendationSettings {
+import de.jstage.recommender.cf.enums.NeighborhoodType;
+import de.jstage.recommender.cf.enums.SimilarityMetric;
+
+public class RecommendationSettings {
 
 	private NeighborhoodType neighborhoodType;
 	private int numberOfRecommendation;
@@ -13,9 +16,9 @@ public class AdditionalRecommendationSettings {
 	private SimilarityMetric similarityMetricForPreComputation;
 
 
-	public AdditionalRecommendationSettings(NeighborhoodType neighborhoodType, int numberOfRecommendation,
-											int numberOfRecommendedBecause, double neighborhoodThreshold,
-											boolean isCachingRecommender, boolean isItemPreComputationEnabled) {
+	public RecommendationSettings(NeighborhoodType neighborhoodType, int numberOfRecommendation,
+                                int numberOfRecommendedBecause, double neighborhoodThreshold,
+                                boolean isCachingRecommender, boolean isItemPreComputationEnabled) {
 		this.neighborhoodType = neighborhoodType;
 		this.numberOfRecommendation = numberOfRecommendation;
 		this.numberOfRecommendedBecause = numberOfRecommendedBecause;

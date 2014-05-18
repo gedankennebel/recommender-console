@@ -1,13 +1,13 @@
 package de.jstage.recommender.cf.service;
 
-import de.jstage.recommender.cf.aspect.ComputingTimeAspect;
+import de.jstage.recommender.cf.aop.ComputingTimeAspect;
 import de.jstage.recommender.cf.domain.EvaluationParameters;
 import de.jstage.recommender.cf.domain.EvaluationResult;
 import de.jstage.recommender.cf.domain.FullEvaluationResult;
 import de.jstage.recommender.cf.domain.RecommendationParameters;
 import de.jstage.recommender.cf.domain.RecommendationResponse;
-import de.jstage.recommender.cf.recommendationMisc.RecommendationType;
-import de.jstage.recommender.cf.recommendationMisc.SimilarityMetric;
+import de.jstage.recommender.cf.enums.RecommendationType;
+import de.jstage.recommender.cf.enums.SimilarityMetric;
 import org.apache.mahout.cf.taste.common.TasteException;
 import org.apache.mahout.cf.taste.eval.IRStatistics;
 import org.apache.mahout.cf.taste.impl.eval.LoadStatistics;

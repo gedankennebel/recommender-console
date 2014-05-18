@@ -2,7 +2,7 @@ package de.jstage.recommender.cf.service;
 
 import de.jstage.recommender.cf.domain.RecommendationParameters;
 import de.jstage.recommender.cf.mahout.CachingItemRecommender;
-import de.jstage.recommender.cf.recommendationMisc.SimilarityMetric;
+import de.jstage.recommender.cf.enums.SimilarityMetric;
 import org.apache.mahout.cf.taste.common.TasteException;
 import org.apache.mahout.cf.taste.eval.RecommenderBuilder;
 import org.apache.mahout.cf.taste.impl.recommender.GenericItemBasedRecommender;

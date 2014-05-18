@@ -1,4 +1,4 @@
-package de.jstage.recommender.cf.aspect;
+package de.jstage.recommender.cf.aop;
 
 import de.jstage.recommender.cf.domain.RecommendationResponse;
 import org.aspectj.lang.ProceedingJoinPoint;

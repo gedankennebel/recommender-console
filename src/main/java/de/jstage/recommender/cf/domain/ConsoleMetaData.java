@@ -1,6 +1,6 @@
 package de.jstage.recommender.cf.domain;
 
-import de.jstage.recommender.cf.recommendationMisc.RecommendationType;
+import de.jstage.recommender.cf.enums.RecommendationType;
 
 import java.util.List;
 

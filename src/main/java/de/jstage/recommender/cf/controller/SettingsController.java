@@ -1,6 +1,6 @@
 package de.jstage.recommender.cf.controller;
 
-import de.jstage.recommender.cf.recommendationMisc.AdditionalRecommendationSettings;
+import de.jstage.recommender.cf.domain.RecommendationSettings;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +15,7 @@ import javax.inject.Inject;
 public class SettingsController {
 
 	@Inject
-	private AdditionalRecommendationSettings settings;
+	private RecommendationSettings settings;
 
 	@RequestMapping(value = "/because", method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)

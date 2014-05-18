@@ -20,6 +20,11 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * <p>
+ * A {@link ItemBasedRecommender} which caches the results from another {@link ItemBasedRecommender} in memory.
+ * </p>
+ */
 public class CachingItemRecommender implements ItemBasedRecommender {
 
 	private static final Logger log = LoggerFactory.getLogger(CachingItemRecommender.class);

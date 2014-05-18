@@ -1,7 +1,7 @@
 package de.jstage.recommender.cf.service;
 
-import de.jstage.recommender.cf.recommendationMisc.AdditionalRecommendationSettings;
-import de.jstage.recommender.cf.recommendationMisc.SimilarityMetric;
+import de.jstage.recommender.cf.domain.RecommendationSettings;
+import de.jstage.recommender.cf.enums.SimilarityMetric;
 import org.apache.mahout.cf.taste.common.TasteException;
 import org.apache.mahout.cf.taste.eval.RecommenderBuilder;
 import org.apache.mahout.cf.taste.impl.neighborhood.NearestNUserNeighborhood;
@@ -54,7 +54,7 @@ public class UserBasedRecommendationService extends AbstractCfRecommendationServ
 		}
 	}
 
-	private UserNeighborhood getUserNeighborhood(AdditionalRecommendationSettings settings, UserSimilarity similarity, DataModel dataModel) throws TasteException {
+	private UserNeighborhood getUserNeighborhood(RecommendationSettings settings, UserSimilarity similarity, DataModel dataModel) throws TasteException {
 		double threshold = settings.getNeighborhoodThreshold();
 		switch (settings.getNeighborhoodType()) {
 			case NEAREST_N:

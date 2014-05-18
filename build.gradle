@@ -20,10 +20,10 @@ dependencies {
     compile('org.springframework:spring-context:4.0.2.RELEASE') {
         exclude module: 'commons-logging'
     }
-    compile 'org.springframework:spring-context-support:4.0.2.RELEASE'
-    compile "org.springframework:spring-webmvc:4.0.2.RELEASE"
-    compile "org.springframework:spring-test:4.0.2.RELEASE"
-    compile("org.springframework:spring-jdbc:4.0.2.RELEASE")
+    compile 'org.springframework:spring-context-support:4.0.4.RELEASE'
+    compile "org.springframework:spring-webmvc:4.0.4.RELEASE"
+    compile "org.springframework:spring-test:4.0.4.RELEASE"
+    compile("org.springframework:spring-jdbc:4.0.4.RELEASE")
 
     compile 'com.fasterxml.jackson.core:jackson-annotations:2.3.0'
     compile 'com.fasterxml.jackson.core:jackson-core:2.3.0'
