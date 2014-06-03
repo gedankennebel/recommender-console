@@ -39,6 +39,8 @@ dependencies {
 
     compile 'org.freemarker:freemarker:2.3.20'
 
+    compile 'org.apache.httpcomponents:httpclient:4.1.2'
+
     compile 'org.aspectj:aspectjtools:1.7.4'
     compile 'org.aspectj:aspectjrt:1.7.4'
 

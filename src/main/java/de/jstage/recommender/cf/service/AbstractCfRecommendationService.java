@@ -43,7 +43,7 @@ public abstract class AbstractCfRecommendationService implements RecommendationS
 
   @Override
   public List<RecommendedItem> getRecommendations(RecommendationParameters param) throws TasteException {
-    return getRecommender(param.getAppliedSimilarity()).recommend(param.getUserId(), param.getHowMany());
+	  return getRecommender(param.getAppliedSimilarity()).recommend(param.getUserId(), param.getHowMany());
   }
 
   @Override

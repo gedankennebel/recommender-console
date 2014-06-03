@@ -7,16 +7,16 @@ public class FullEvaluationResult {
 	private String recommendationType;
 	private String evaluationType;
 	private List<EvaluationResult> evaluationResultList;
-	private double fullComputingTime;
+	private double computingTimeInSeconds;
 
 	public FullEvaluationResult() {
 	}
 
-	public FullEvaluationResult(String recommendationType, String evaluationType, List<EvaluationResult> evaluationResultList, double fullComputingTime) {
+	public FullEvaluationResult(String recommendationType, String evaluationType, List<EvaluationResult> evaluationResultList, double computingTimeInSeconds) {
 		this.recommendationType = recommendationType;
 		this.evaluationType = evaluationType;
 		this.evaluationResultList = evaluationResultList;
-		this.fullComputingTime = fullComputingTime;
+		this.computingTimeInSeconds = computingTimeInSeconds;
 	}
 
 	public String getEvaluationType() {
@@ -43,11 +43,11 @@ public class FullEvaluationResult {
 		this.evaluationResultList = evaluationResultList;
 	}
 
-	public double getFullComputingTime() {
-		return fullComputingTime;
+	public double getComputingTimeInSeconds() {
+		return computingTimeInSeconds;
 	}
 
-	public void setFullComputingTime(double fullComputingTime) {
-		this.fullComputingTime = fullComputingTime;
+	public void setComputingTimeInSeconds(double computingTimeInSeconds) {
+		this.computingTimeInSeconds = computingTimeInSeconds;
 	}
 }

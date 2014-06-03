@@ -15,22 +15,23 @@ import javax.inject.Inject;
 @PropertySources(value = {@PropertySource("/mahout.properties")})
 public class RecommendationConfig {
 
-	@Inject
-	private DataModel dataModel;
+  @Inject
+  private DataModel dataModel;
 
-	@Inject
-	private Environment environment;
+  @Inject
+  private Environment environment;
 
-	@Bean
-	public RecommendationSettings defaultSetting() {
-		int numberOfRecommendation = Integer.parseInt(environment.getProperty("numberOfRecommendation"));
-		int numberOfRecommendedBecause = Integer.parseInt(environment.getProperty("numberOfRecommendedBecause"));
-		double neighborhoodThreshold = Double.parseDouble(environment.getProperty("neighborhoodThreshold"));
-		boolean isCachingRecommender = Boolean.parseBoolean(environment.getProperty("cachingRecommender"));
-		boolean isItemPreComputationEnabled = Boolean.parseBoolean(environment.getProperty("isItemPreComputationEnabled"));
-		String neighorhoodType = environment.getProperty("neighborhoodType");
-		return new RecommendationSettings(NeighborhoodType.valueOf(neighorhoodType),
-				numberOfRecommendation, numberOfRecommendedBecause, neighborhoodThreshold, isCachingRecommender,
-				isItemPreComputationEnabled);
-	}
+  @Bean
+  public RecommendationSettings defaultSetting() {
+    int numberOfRecommendation = Integer.parseInt(environment.getProperty("numberOfRecommendation"));
+    int numberOfRecommendedBecause = Integer.parseInt(environment.getProperty("numberOfRecommendedBecause"));
+    double neighborhoodThreshold = Double.parseDouble(environment.getProperty("neighborhoodThreshold"));
+    boolean isCachingRecommender = Boolean.parseBoolean(environment.getProperty("cachingRecommender"));
+    boolean isItemPreComputationEnabled = Boolean.parseBoolean(environment.getProperty("isItemPreComputationEnabled"));
+    String preComputationSimilarityMetric = environment.getProperty("preComputationSimilarityMetric");
+    String neighorhoodType = environment.getProperty("neighborhoodType");
+    return new RecommendationSettings(NeighborhoodType.valueOf(neighorhoodType),
+            numberOfRecommendation, numberOfRecommendedBecause, neighborhoodThreshold, isCachingRecommender,
+            isItemPreComputationEnabled, preComputationSimilarityMetric);
+  }
 }

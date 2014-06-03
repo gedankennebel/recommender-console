@@ -14,21 +14,21 @@ import java.util.stream.StreamSupport;
 @Service
 public class UserSuggestionService {
 
-	private static final int MAX_SUGGESTIONS = 10;
+  private static final int MAX_SUGGESTIONS = 10;
 
-	@Inject
-	private DataModel dataModel;
+  @Inject
+  private DataModel dataModel;
 
-	public List<String> suggestUsers(final String query) throws TasteException {
-		return StreamSupport.stream(getSpliterator(), true)
-				.filter(userId -> String.valueOf(userId).contains(query))
-				.sorted()
-				.limit(MAX_SUGGESTIONS)
-				.map(Object::toString)
-				.collect(Collectors.toList());
-	}
+  public List<String> suggestUsers(final String query) throws TasteException {
+    return StreamSupport.stream(getUserIds(), true)
+            .filter(userId -> String.valueOf(userId).contains(query))
+            .sorted()
+            .limit(MAX_SUGGESTIONS)
+            .map(Object::toString)
+            .collect(Collectors.toList());
+  }
 
-	private Spliterator<Long> getSpliterator() throws TasteException {
-		return SpliteratorUtil.getSpliterator(dataModel.getUserIDs());
-	}
+  private Spliterator<Long> getUserIds() throws TasteException {
+    return SpliteratorUtil.getSpliterator(dataModel.getUserIDs());
+  }
 }
