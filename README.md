@@ -1,0 +1,1 @@
+This project contains a Webserver with Apache Mahout as recommender engine, to provide recommendations using the collaborative filtering technique. The webserver is build up with the Spring Framework. All recommendations and further features can be accessed via a webservice-interface. Additionally there is a web front-end, for an quick and easy access to the webserver.
